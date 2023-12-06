@@ -1,0 +1,9 @@
+@media (max-width: 600px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .ham-menu {
+    display: flex;
+  }
+}
