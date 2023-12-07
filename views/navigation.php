@@ -1,10 +1,15 @@
+<?php require_once __DIR__ . "/../app/autoload.php"; ?>
+
 <header>
-    <h1>Polar Hotel</h1>
+    <a href="/index.php" class="nav-logo">Polar Hotel</a>
     <aside id="a-side">
         <nav id="a-side-nav">
             <a href="#">Activities</a>
             <a href="#">Offers</a>
-            <a href="#">Sign in</a>
+            <?php if (isset($_SESSION["admin"])) : ?>
+                <a href="admin.php">Admin</a>
+            <?php endif; ?>
+            <a href=<?= isset($_SESSION["admin"]) ? "app/logout.php" : "login.php" ?>><?= isset($_SESSION["admin"]) ? "Sign out" : "Sign in" ?></a>
         </nav>
     </aside>
     <div id="ham-menu-btn" class="ham-menu">
@@ -15,6 +20,9 @@
     <nav class="desktop-nav">
         <a href="#">Activities</a>
         <a href="#">Offers</a>
-        <a href="#">Sign in</a>
+        <?php if (isset($_SESSION["admin"])) : ?>
+            <a href="admin.php">Admin</a>
+        <?php endif; ?>
+        <a href=<?= isset($_SESSION["admin"]) ? "app/logout.php" : "login.php" ?>><?= isset($_SESSION["admin"]) ? "Sign out" : "Sign in" ?></a>
     </nav>
 </header>

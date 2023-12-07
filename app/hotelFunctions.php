@@ -50,3 +50,9 @@ function isValidUuid(string $uuid): bool
     }
     return true;
 }
+
+function redirect(string $path)
+{
+    header("Location: $path");
+    exit;
+}

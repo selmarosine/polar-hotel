@@ -50,6 +50,14 @@ a {
   font-size: 1rem;
 }
 
+.border-error-red {
+  border: 1px solid red;
+}
+
+.text-error-red {
+  color: red;
+}
+
 /* ---- Header ---- */
 header {
   display: flex;
@@ -85,6 +93,12 @@ aside nav {
   padding: 24px;
   transform: translateX(100%);
   transition: all 0.3s ease-in;
+}
+
+.nav-logo {
+  user-select: none;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .show-mobile-nav {
@@ -253,4 +267,29 @@ aside nav {
   background: var(--white);
   color: var(--dark-blue);
   text-align: center;
+}
+
+/* ---- Login ---- */
+.admin-main {
+  height: 100vh;
+  background: var(--dark-blue);
+  color: var(--white);
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-main form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-text {
+  font-size: 1.2rem;
+  color: var(--dark-blue);
+  padding: 8px 16px;
+  border-radius: var(--rounded-sm);
+  border: none;
 }
