@@ -3,7 +3,7 @@ require_once __DIR__ . "/app/autoload.php";
 require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
 ?>
-<main class="admin-main">
+<main class="admin-main center">
     <form action="app/login.php" method="post">
         <label for="password">
             <h3>Enter super secret password</h3>

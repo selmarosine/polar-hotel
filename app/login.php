@@ -10,6 +10,7 @@ $dotenv->load();
 
 if (isset($_POST["password"])) {
     $password = $_POST["password"];
+    unset($_POST["password"]);
 
     if ($password === $_ENV["API_KEY"]) {
         $_SESSION["admin"] = true;

@@ -39,7 +39,8 @@ button {
 }
 
 button,
-input {
+input,
+textarea {
   outline: none;
 }
 
@@ -50,12 +51,27 @@ a {
   font-size: 1rem;
 }
 
+textarea {
+  resize: vertical;
+}
+
 .border-error-red {
   border: 1px solid red;
 }
 
 .text-error-red {
   color: red;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---- Header ---- */
@@ -274,10 +290,7 @@ aside nav {
   height: 100vh;
   background: var(--dark-blue);
   color: var(--white);
-  padding-top: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 80px 24px 0 24px;
 }
 
 .admin-main form {
@@ -292,4 +305,26 @@ aside nav {
   padding: 8px 16px;
   border-radius: var(--rounded-sm);
   border: none;
+}
+
+/* ---- Admin ---- */
+.max-w-section {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.create-room-input label {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.create-room-input input,
+.create-room-input textarea {
+  font-size: 18px;
+  padding: 8px;
+  border-radius: var(--rounded-sm);
+  border: none;
+  color: var(--dark-blue);
 }
