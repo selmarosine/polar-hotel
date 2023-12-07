@@ -15,11 +15,11 @@ const toggleAside = () => {
     // Close aside
     aSideNav.classList.remove('show-mobile-nav');
     setTimeout(() => {
-      aSide.style.display = 'static';
+      aSide.style.display = 'none';
     }, 300);
   } else {
     // Open aside
-    aSide.style.display = 'hidden';
+    aSide.style.display = 'flex';
     setTimeout(() => {
       aSideNav.classList.add('show-mobile-nav');
     }, 10);

@@ -1,5 +1,5 @@
 <header class="aside-parent">
-    <h1>Cayo Cove</h1>
+    <h1>Polar Hotel</h1>
     <aside id="a-side">
         <nav id="a-side-nav">
             <a href="#">Activities</a>
