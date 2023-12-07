@@ -35,6 +35,7 @@ h3 {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 button,
@@ -60,6 +61,7 @@ header {
   background: var(--dark-blue);
   color: var(--white);
   position: fixed;
+  top: 0;
 }
 
 aside {
@@ -88,10 +90,6 @@ aside nav {
 .show-mobile-nav {
   transform: translateX(0);
   transition: all 0.3s ease-in;
-}
-
-.aside-parent {
-  position: relative;
 }
 
 .desktop-nav {
@@ -189,6 +187,7 @@ aside nav {
   border: 1px solid var(--dark-blue);
   border-radius: 22px;
   cursor: pointer;
+  max-width: 500px;
 }
 
 .check-date-input {
@@ -200,10 +199,13 @@ aside nav {
 }
 
 .rooms-container {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 16px;
+}
+
+.rooms-container-title {
+  margin: 24px 0;
 }
 
 .room-card {
@@ -227,4 +229,28 @@ aside nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.explore-activities-section {
+  background: var(--dark-blue);
+  color: var(--white);
+  padding: 24px;
+}
+
+.explore-activities-section div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.btn-white {
+  padding: 8px;
+  border-radius: var(--rounded-sm);
+  font-weight: 500;
+  font-size: 1.2rem;
+  background: var(--white);
+  color: var(--dark-blue);
+  text-align: center;
 }

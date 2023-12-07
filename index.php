@@ -19,8 +19,8 @@
                 <span>Sort by: Rating (high to low)</span>
             </div>
         </form>
+        <h3 class="rooms-container-title">Rooms</h3>
         <div class="rooms-container">
-            <h3>Rooms</h3>
             <div class="room-card">
                 <img class="room-card-image" src="./assets/images/cabin_snow_yellow.jpg" alt="cabin_snow_yellow">
                 <div class="room-card-text-content">
@@ -81,6 +81,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="explore-activities-section">
+        <div>
+            <h3>Explore Svalbard</h3>
+            <p>Polar hotel offers many activities to do during your stay in Svalbard,</p>
+            <a href="#" class="btn-white">Explore</a>
         </div>
     </section>
 </main>

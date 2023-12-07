@@ -1,4 +1,4 @@
-<header class="aside-parent">
+<header>
     <h1>Polar Hotel</h1>
     <aside id="a-side">
         <nav id="a-side-nav">
