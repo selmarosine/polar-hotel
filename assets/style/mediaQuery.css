@@ -28,6 +28,16 @@
   }
 }
 
+@media (min-width: 700px) {
+  .activity-card {
+    flex-direction: row;
+  }
+
+  .activity-card img {
+    width: calc(100% / 3);
+  }
+}
+
 @media (max-width: 600px) {
   .desktop-nav {
     display: none;

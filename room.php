@@ -29,6 +29,9 @@ $room = reset($filteredRooms);
             <?php endforeach; ?>
         </div>
     </div>
+    <form class="book-room-form">
+        <?php require __DIR__ . "/views/dateSearch.php"; ?>
+    </form>
 </main>
 
 <?php require_once __DIR__ . "/views/footer.php"; ?>

@@ -4,7 +4,7 @@
     <a href="/index.php" class="nav-logo">Polar Hotel</a>
     <aside id="a-side">
         <nav id="a-side-nav">
-            <a href="#">Activities</a>
+            <a href="/activities.php">Activities</a>
             <a href="#">Offers</a>
             <?php if (isset($_SESSION["admin"])) : ?>
                 <a href="admin.php">Admin</a>
@@ -18,7 +18,7 @@
         <div></div>
     </div>
     <nav class="desktop-nav">
-        <a href="#">Activities</a>
+        <a href="/activities.php">Activities</a>
         <a href="#">Offers</a>
         <?php if (isset($_SESSION["admin"])) : ?>
             <a href="admin.php">Admin</a>

@@ -15,11 +15,7 @@ require __DIR__ . "/app/getRooms.php";
     </section>
     <section class="rooms-section">
         <form class="rooms-filter-container">
-            <div class="check-in-out-search">
-                <input class="check-date-input" type="date" name="check-in" id="check-in">
-                <input class="check-date-input" type="date" name="check-out" id="check-out">
-                <button class="submit-btn-blue" type="submit">Search</button>
-            </div>
+            <?php require __DIR__ . "/views/dateSearch.php"; ?>
             <div class="sort-btn-stroke">
                 <i class="fa-solid fa-arrows-up-down"></i>
                 <span>Sort by: Rating (high to low)</span>
@@ -47,7 +43,7 @@ require __DIR__ . "/app/getRooms.php";
         <div>
             <h3>Explore Svalbard</h3>
             <p>Polar hotel offers many activities to do during your stay in Svalbard,</p>
-            <a href="#" class="btn-white">Explore</a>
+            <a href="/activities.php" class="btn-white">Explore</a>
         </div>
     </section>
 </main>

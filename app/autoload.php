@@ -11,3 +11,5 @@ mb_internal_encoding('UTF-8');
 
 // Include the helper functions.
 require __DIR__ . '/hotelFunctions.php';
+
+$db = new PDO("sqlite:" . __DIR__ . "/database/polar-hotel.db");

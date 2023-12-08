@@ -10,8 +10,6 @@ $dotenv->load();
 
 $stars = intval($_ENV["STARS"]) * 10;
 
-$db = new PDO("sqlite:./database/polar-hotel.db");
-
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
     $images = $_FILES["images"];
     $imagesLength = count($images["name"]) <= 3 ? count($images["name"]) : 3;

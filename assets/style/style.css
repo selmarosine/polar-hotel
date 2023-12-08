@@ -381,3 +381,39 @@ aside nav {
 .room-info-container {
   width: 100%;
 }
+
+.book-room-form {
+  margin: 64px 0;
+}
+
+/* ---- Activities ---- */
+.activity-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--rounded-md);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.activity-card img {
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.activity-card-info {
+  padding: 16px;
+}
+
+.activity-card-info .price-sm {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}

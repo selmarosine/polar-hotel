@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$db = new PDO("sqlite:" . __DIR__ . "/database/polar-hotel.db");
+require_once __DIR__ . "/autoload.php";
 
 $getRooms = $db->query("SELECT rooms.id, rooms.name, rooms.price, rooms.description, image_room.image FROM rooms
 INNER JOIN image_room ON image_room.room_id = rooms.id");
