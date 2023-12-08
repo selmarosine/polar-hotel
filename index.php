@@ -2,6 +2,9 @@
 require_once __DIR__ . "/app/autoload.php";
 require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
+
+require __DIR__ . "/app/getRooms.php";
+
 ?>
 <main>
     <section class="hero">
@@ -24,66 +27,18 @@ require_once __DIR__ . "/views/navigation.php";
         </form>
         <h3 class="rooms-container-title">Rooms</h3>
         <div class="rooms-container">
-            <div class="room-card">
-                <img class="room-card-image" src="./assets/images/cabin_snow_yellow.jpg" alt="cabin_snow_yellow">
-                <div class="room-card-text-content">
-                    <div class="space-between">
-                        <h3>Luxury Room</h3>
-                        <h3>$100</h3>
-                    </div>
-                    <span>This room has a beautiful sea view</span>
-                    <div class="space-between">
-                        <span>87 reviews</span>
-                        <div class="stars-container">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+            <?php foreach ($rooms as $room) : ?>
+                <div class="room-card text-dark-blue">
+                    <img class="room-card-image" src=<?= "./assets/images/" . $room["images"][0]; ?> alt="cabin_snow_yellow">
+                    <div class="room-card-text-content">
+                        <div class="space-between">
+                            <h3><?= $room["name"]; ?></h3>
+                            <h3><?= "$" . $room["price"]; ?></h3>
                         </div>
+                        <span><?= $room["description"]; ?></span>
                     </div>
                 </div>
-            </div>
-            <div class="room-card">
-                <img class="room-card-image" src="./assets/images/cabin_snow_yellow.jpg" alt="cabin_snow_yellow">
-                <div class="room-card-text-content">
-                    <div class="space-between">
-                        <h3>Luxury Room</h3>
-                        <h3>$100</h3>
-                    </div>
-                    <span>This room has a beautiful sea view</span>
-                    <div class="space-between">
-                        <span>87 reviews</span>
-                        <div class="stars-container">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="room-card">
-                <img class="room-card-image" src="./assets/images/cabin_snow_yellow.jpg" alt="cabin_snow_yellow">
-                <div class="room-card-text-content">
-                    <div class="space-between">
-                        <h3>Luxury Room</h3>
-                        <h3>$100</h3>
-                    </div>
-                    <span>This room has a beautiful sea view</span>
-                    <div class="space-between">
-                        <span>87 reviews</span>
-                        <div class="stars-container">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </section>
     <section class="explore-activities-section">

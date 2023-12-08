@@ -10,7 +10,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -72,6 +72,15 @@ textarea {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.flex-md {
+  display: flex;
+  gap: 16px;
+}
+
+.text-dark-blue {
+  color: var(--dark-blue);
 }
 
 /* ---- Header ---- */
@@ -159,7 +168,7 @@ aside nav {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('../images/svalbard_bear.jpg');
+  background: url("../images/svalbard_bear.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -240,6 +249,7 @@ aside nav {
 
 .room-card {
   overflow: hidden;
+  background: var(--white);
   border-radius: var(--rounded-md);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -287,7 +297,7 @@ aside nav {
 
 /* ---- Login ---- */
 .admin-main {
-  height: 100vh;
+  min-height: 100vh;
   background: var(--dark-blue);
   color: var(--white);
   padding: 80px 24px 0 24px;
@@ -327,4 +337,12 @@ aside nav {
   border-radius: var(--rounded-sm);
   border: none;
   color: var(--dark-blue);
+}
+
+.room-name-input {
+  width: 300px;
+}
+
+.rooms-admin-container {
+  margin: 64px 0;
 }

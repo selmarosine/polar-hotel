@@ -16,4 +16,12 @@
   .ham-menu {
     display: flex;
   }
+
+  .name-price-container {
+    flex-direction: column;
+  }
+
+  .name-price-container input {
+    width: 100%;
+  }
 }
