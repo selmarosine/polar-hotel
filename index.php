@@ -28,16 +28,18 @@ require __DIR__ . "/app/getRooms.php";
         <h3 class="rooms-container-title">Rooms</h3>
         <div class="rooms-container">
             <?php foreach ($rooms as $room) : ?>
-                <div class="room-card text-dark-blue">
-                    <img class="room-card-image" src=<?= "./assets/images/" . $room["images"][0]; ?> alt="cabin_snow_yellow">
-                    <div class="room-card-text-content">
-                        <div class="space-between">
-                            <h3><?= $room["name"]; ?></h3>
-                            <h3><?= "$" . $room["price"]; ?></h3>
+                <a href=<?= "/room.php?room=" . $room["id"]; ?>>
+                    <div class="room-card text-dark-blue">
+                        <img class="room-card-image text-dark-blue" src=<?= "./assets/images/" . $room["images"][0]; ?> alt="cabin_snow_yellow">
+                        <div class="room-card-text-content">
+                            <div class="space-between">
+                                <h3><?= $room["name"]; ?></h3>
+                                <h3><?= "$" . $room["price"]; ?></h3>
+                            </div>
+                            <span><?= $room["description"]; ?></span>
                         </div>
-                        <span><?= $room["description"]; ?></span>
                     </div>
-                </div>
+                </a>
             <?php endforeach; ?>
         </div>
     </section>

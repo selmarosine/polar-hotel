@@ -346,3 +346,38 @@ aside nav {
 .rooms-admin-container {
   margin: 64px 0;
 }
+
+/* ---- Room ---- */
+.room-main {
+  min-height: 100vh;
+  padding: 104px 24px 0 24px;
+}
+
+.room-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 800px;
+}
+
+.room-gallery-grid img {
+  width: 100%;
+  border-radius: var(--rounded-sm);
+}
+
+.room-gallery-grid img:nth-child(1) {
+  grid-column: span 2;
+}
+
+.room-content-order {
+  display: flex;
+  gap: 24px;
+}
+
+.name-price-title {
+  align-items: center;
+}
+
+.room-info-container {
+  width: 100%;
+}

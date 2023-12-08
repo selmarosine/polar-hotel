@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 $db = new PDO("sqlite:" . __DIR__ . "/database/polar-hotel.db");
 
-$rooms = $db->query("SELECT rooms.id, rooms.name, rooms.price, rooms.description, image_room.image FROM rooms
+$getRooms = $db->query("SELECT rooms.id, rooms.name, rooms.price, rooms.description, image_room.image FROM rooms
 INNER JOIN image_room ON image_room.room_id = rooms.id");
 
-$rooms->execute();
+$getRooms->execute();
 
-$rooms = $rooms->fetchAll(PDO::FETCH_ASSOC);
+$rooms = $getRooms->fetchAll(PDO::FETCH_ASSOC);
 
 $mappedRooms = [];
 
