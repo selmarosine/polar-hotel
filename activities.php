@@ -10,7 +10,7 @@ require __DIR__ . "/app/getActivities.php";
     <div class="activity-cards-container">
         <?php foreach ($activities as $activity) : ?>
             <div class="activity-card">
-                <img src=<?= "/assets/images/" . $activity["image"] ?> alt="activity">
+                <img src=<?= "assets/images/" . $activity["image"] ?> alt="activity">
                 <div class="activity-card-info">
                     <h3><?= $activity["activity"]; ?></h3>
                     <div class="price-sm"><?= "$" . $activity["price"]; ?></div>

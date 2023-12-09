@@ -56,3 +56,47 @@ function redirect(string $path)
     header("Location: $path");
     exit;
 }
+
+function monthArrayDate(int $timeStamp): array
+{
+    return [
+        "date" => date("Y-m-d", $timeStamp),
+        "dayOfWeek" => intval(date("N", $timeStamp)),
+        "dayDate" => intval(date("d", $timeStamp)),
+        "month" => intval(date("m", $timeStamp)),
+    ];
+}
+
+function getMonth(int $monthIndex, int $year): array
+{
+    // Creates an array of 42 dates to fill 6 weeks in a calendar
+
+    $monthLength = cal_days_in_month(CAL_GREGORIAN, $monthIndex, $year); // Length of the selected month
+    $month = [];
+
+    $firstDay = date("N", mktime(0, 0, 0, $monthIndex, 1, $year));
+
+    // Days before and after the selected month
+    $daysBefore = $firstDay - 1;
+    $daysAfter = 42 - $monthLength - $daysBefore;
+
+    // Days before current selected month
+    for ($idx = $daysBefore; $idx > 0; $idx--) {
+        $timeStamp = mktime(0, 0, 0, $monthIndex, 1 - $idx, $year);
+        $month[] = monthArrayDate($timeStamp);
+    }
+
+    // Selected month
+    for ($idx = 0; $idx < $monthLength; $idx++) {
+        $timeStamp = mktime(0, 0, 0, $monthIndex, $idx + 1, $year);
+        $month[] = monthArrayDate($timeStamp);
+    }
+
+    // Days after selected month
+    for ($idx = 1; $idx <= $daysAfter; $idx++) {
+        $timeStamp = mktime(0, 0, 0, $monthIndex, $monthLength + $idx, $year);
+        $month[] = monthArrayDate($timeStamp);
+    }
+
+    return $month;
+}

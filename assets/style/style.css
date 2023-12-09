@@ -386,6 +386,39 @@ aside nav {
   margin: 64px 0;
 }
 
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(100px, 1fr));
+  grid-template-rows: repeat(6, 150px);
+  gap: 8px;
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 16px 0;
+}
+
+.calendar-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-cell {
+  padding: 8px;
+  border: 1px solid var(--dark-blue);
+  border-radius: var(--rounded-sm);
+  scroll-snap-align: start;
+}
+
+.offset-month {
+  opacity: 0.5;
+}
+
+.current-month {
+  cursor: pointer;
+}
+
 /* ---- Activities ---- */
 .activity-cards-container {
   display: flex;

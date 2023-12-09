@@ -15,7 +15,11 @@ require __DIR__ . "/app/getRooms.php";
     </section>
     <section class="rooms-section">
         <form class="rooms-filter-container">
-            <?php require __DIR__ . "/views/dateSearch.php"; ?>
+            <div class="check-in-out-search">
+                <input class="check-date-input" type="date" name="check-in" id="check-in" min="2024-01-01" max="2024-01-31">
+                <input class="check-date-input" type="date" name="check-out" id="check-out" min="2024-01-01" max="2024-01-31">
+                <button class="submit-btn-blue" type="submit">Search</button>
+            </div>
             <div class="sort-btn-stroke">
                 <i class="fa-solid fa-arrows-up-down"></i>
                 <span>Sort by: Rating (high to low)</span>
@@ -24,7 +28,7 @@ require __DIR__ . "/app/getRooms.php";
         <h3 class="rooms-container-title">Rooms</h3>
         <div class="rooms-container">
             <?php foreach ($rooms as $room) : ?>
-                <a href=<?= "/room.php?room=" . $room["id"]; ?>>
+                <a href=<?= "room.php?room=" . $room["id"]; ?>>
                     <div class="room-card text-dark-blue">
                         <img class="room-card-image text-dark-blue" src=<?= "./assets/images/" . $room["images"][0]; ?> alt="cabin_snow_yellow">
                         <div class="room-card-text-content">
@@ -43,7 +47,7 @@ require __DIR__ . "/app/getRooms.php";
         <div>
             <h3>Explore Svalbard</h3>
             <p>Polar hotel offers many activities to do during your stay in Svalbard,</p>
-            <a href="/activities.php" class="btn-white">Explore</a>
+            <a href="activities.php" class="btn-white">Explore</a>
         </div>
     </section>
 </main>

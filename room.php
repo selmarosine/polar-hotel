@@ -30,7 +30,7 @@ $room = reset($filteredRooms);
         </div>
     </div>
     <form class="book-room-form">
-        <?php require __DIR__ . "/views/dateSearch.php"; ?>
+        <?php require __DIR__ . "/views/calendar.php"; ?>
     </form>
 </main>
 

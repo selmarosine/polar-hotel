@@ -12,6 +12,11 @@ if (isset($_POST["password"])) {
     $password = $_POST["password"];
     unset($_POST["password"]);
 
+    if (!isValidUuid($password)) {
+        $_SESSION["loginError"] = true;
+        redirect("/login.php");
+    }
+
     if ($password === $_ENV["API_KEY"]) {
         $_SESSION["admin"] = true;
         redirect("/admin.php");
