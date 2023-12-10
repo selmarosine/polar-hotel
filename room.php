@@ -5,10 +5,13 @@ require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
 
 require __DIR__ . "/app/getRooms.php";
+require __DIR__ . "/app/getActivities.php";
+
+$roomId = intval($_GET["room"]);
 
 // Get the selected room from $rooms
-$filteredRooms = array_filter($rooms, function ($room) {
-    return $room["id"] === intval($_GET["room"]);
+$filteredRooms = array_filter($rooms, function ($room) use ($roomId) {
+    return $room["id"] === $roomId;
 });
 
 $room = reset($filteredRooms);
@@ -30,7 +33,28 @@ $room = reset($filteredRooms);
         </div>
     </div>
     <form class="book-room-form">
-        <?php require __DIR__ . "/views/calendar.php"; ?>
+        <div class="check-in-out-calenders">
+            <div>
+                <h3>Check in</h3>
+                <?php
+                $calendarIdentifier = "_checkin";
+                require __DIR__ . "/views/calendar.php"; ?>
+            </div>
+            <div>
+                <h3>Check out</h3>
+                <?php
+                $calendarIdentifier = "_checkout";
+                require __DIR__ . "/views/calendar.php"; ?>
+            </div>
+        </div>
+        <select name="activities" id="activities">
+            <option value="" selected disabled>Add activity to your stay</option>
+            <?php foreach ($activities as $activity) : ?>
+                <option value="<?= $activity["id"] ?>"><?= "$" . $activity["price"] . " - " .  $activity["activity"] ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="hidden" name="room" value="<?= $roomId ?>">
+        <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>
     </form>
 </main>
 

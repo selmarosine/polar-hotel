@@ -8,6 +8,12 @@
   }
 }
 
+@media (min-width: 900px) {
+  .check-in-out-calenders {
+    flex-direction: row;
+  }
+}
+
 @media (min-width: 800px) {
   .check-in-out-search {
     flex-direction: row;

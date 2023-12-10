@@ -383,20 +383,16 @@ aside nav {
 }
 
 .book-room-form {
-  margin: 64px 0;
+  margin: 64px auto;
+  width: fit-content;
 }
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, minmax(100px, 1fr));
-  grid-template-rows: repeat(6, 150px);
+  grid-template-columns: repeat(7, minmax(40px, 50px));
+  grid-template-rows: repeat(6, minmax(40px, 50px));
+  place-content: center;
   gap: 8px;
-  overflow: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  scroll-behavior: smooth;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
   padding: 16px 0;
 }
 
@@ -408,7 +404,10 @@ aside nav {
   padding: 8px;
   border: 1px solid var(--dark-blue);
   border-radius: var(--rounded-sm);
-  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
 }
 
 .offset-month {
@@ -417,6 +416,41 @@ aside nav {
 
 .current-month {
   cursor: pointer;
+  transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.contain-radio {
+  position: relative;
+}
+
+.current-month:hover {
+  transition: background 0.2s ease-out, color 0.2s ease-out;
+  background: var(--blue);
+  color: var(--white);
+}
+
+.date-selected {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.date-radio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.check-in-out-calenders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 /* ---- Activities ---- */
