@@ -47,12 +47,24 @@ $room = reset($filteredRooms);
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
         </div>
-        <select name="activities" id="activities">
-            <option value="" selected disabled>Add activity to your stay</option>
+        <div class="room-activities">
             <?php foreach ($activities as $activity) : ?>
-                <option value="<?= $activity["id"] ?>"><?= "$" . $activity["price"] . " - " .  $activity["activity"] ?></option>
+                <div class="room-activities-card">
+                    <img src="<?= "assets/images/" . $activity["image"] ?>" alt="activity">
+                    <input type="checkbox" name="activity" value="<?= $activity["id"] ?>">
+                    <div><?= "$" . $activity["price"] . " - " . $activity["activity"] ?></div>
+                    <a href="activities.php" class="text-dark-blue flex-grow">
+                        <i class="fa-solid fa-link"></i>
+                    </a>
+                </div>
             <?php endforeach; ?>
-        </select>
+        </div>
+        <div>
+            <label for="transfer-code">
+                <h3>Enter your transfer code</h3>
+            </label>
+            <input class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+        </div>
         <input type="hidden" name="room" value="<?= $roomId ?>">
         <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>
     </form>
