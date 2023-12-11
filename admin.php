@@ -2,6 +2,12 @@
 require_once __DIR__ . "/app/autoload.php";
 require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
+require_once __DIR__ . "/vendor/autoload.php";
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$stars = intval($_ENV["STARS"]);
 
 
 if (!isset($_SESSION["admin"])) {
@@ -17,11 +23,13 @@ if (isset($_GET["edit"])) {
     if (isset($_GET["room"])) {
         $roomId = intval($_GET["room"]);
         $room = filterForId($rooms, $roomId);
+        $room["price"] = $room["price"] - $stars;
     }
 
     if (isset($_GET["activity"])) {
         $activityId = intval($_GET["activity"]);
         $activity = filterForId($activities, $activityId);
+        $activity["price"] = $activity["price"] - $stars;
     }
 }
 

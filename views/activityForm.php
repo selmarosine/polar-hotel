@@ -1,4 +1,4 @@
-<form class="admin-form" action="<?= isset($activity) ? "" : "/app/insertActivity.php"; ?>" method="post" enctype="multipart/form-data">
+<form class="admin-form" action="<?= isset($activity) ? "/app/updateActivity.php" : "/app/insertActivity.php"; ?>" method="post" enctype="multipart/form-data">
     <?php if (!isset($activity)) : ?>
         <div class="column create-room-input">
             <label for="image">Upload a image</label>
@@ -22,5 +22,6 @@
     <button class="submit-btn-blue" type="submit"><?= isset($activity) ? "Update activity" : "Add activity"; ?></button>
     <?php if (isset($activity)) : ?>
         <a href="admin.php?form=activityForm" class="submit-btn-blue cancel-update">Cancel update</a>
+        <input type="hidden" name="id" value="<?= $activity["id"] ?>">
     <?php endif; ?>
 </form>

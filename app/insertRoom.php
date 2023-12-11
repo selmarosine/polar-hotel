@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 require_once __DIR__ . "/autoload.php";
-require_once __DIR__ . "/../vendor/autoload.php";
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
-$dotenv->load();
-
-$stars = intval($_ENV["STARS"]);
 
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
     $images = $_FILES["images"];

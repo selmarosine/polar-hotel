@@ -1,4 +1,4 @@
-<form class="admin-form" method="post" action="<?= isset($room) ? "" : "/app/insertRoom.php"; ?>" enctype="multipart/form-data">
+<form class="admin-form" method="post" action="<?= isset($room) ? "/app/updateRoom.php" : "/app/insertRoom.php"; ?>" enctype="multipart/form-data">
     <?php if (!isset($room)) : ?>
         <div class="column create-room-input">
             <label for="images">Upload max 3 images</label>
@@ -22,5 +22,6 @@
     <button class="submit-btn-blue" type="submit"><?= isset($room) ? "Update room" : "Add room"; ?></button>
     <?php if (isset($room)) : ?>
         <a href="admin.php?form=roomForm" class="submit-btn-blue cancel-update">Cancel update</a>
+        <input type="hidden" name="id" value="<?= $room["id"] ?>">
     <?php endif; ?>
 </form>
