@@ -38,3 +38,5 @@ foreach ($rooms as $room) {
 }
 
 $rooms = array_values($mappedRooms);
+
+unset($room);

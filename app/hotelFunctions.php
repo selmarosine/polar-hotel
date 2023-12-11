@@ -100,3 +100,12 @@ function getMonth(int $monthIndex, int $year): array
 
     return $month;
 }
+
+function filterForId(array $arrays, int $arrayId): array
+{
+    $filteredArray = array_filter($arrays, function ($array) use ($arrayId) {
+        return $array["id"] === $arrayId;
+    });
+
+    return reset($filteredArray);
+}

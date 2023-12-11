@@ -8,7 +8,9 @@ let checkInIndex = null;
 let checkOutIndex = null;
 
 const totalPrice = document.querySelector("#total-price");
-const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
+if (totalPrice !== null) {
+  const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
+}
 
 const toggleAside = () => {
   const [firstLine, secondLine, thirdLine] = hamMenuBtn.children;

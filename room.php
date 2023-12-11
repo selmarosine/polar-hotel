@@ -9,12 +9,7 @@ require __DIR__ . "/app/getActivities.php";
 
 $roomId = intval($_GET["room"]);
 
-// Get the selected room from $rooms
-$filteredRooms = array_filter($rooms, function ($room) use ($roomId) {
-    return $room["id"] === $roomId;
-});
-
-$room = reset($filteredRooms);
+$room = filterForId($rooms, $roomId);
 ?>
 
 <main class="room-main max-w-section">
@@ -32,7 +27,7 @@ $room = reset($filteredRooms);
             <?php endforeach; ?>
         </div>
     </div>
-    <form class="book-room-form">
+    <form method="post" class="book-room-form">
         <div class="check-in-out-calenders">
             <div>
                 <h3>Check in</h3>
@@ -65,9 +60,7 @@ $room = reset($filteredRooms);
             </label>
             <input placeholder="Code ..." value="9ca1e3d1-aa16-4455-9936-739984164f40" class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
         </div>
-        <div>
-            <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
-        </div>
+        <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
         <input type="hidden" name="room" value="<?= $roomId ?>">
         <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>
     </form>
