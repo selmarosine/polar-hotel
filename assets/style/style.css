@@ -376,7 +376,8 @@ aside nav {
   max-width: 800px;
 }
 
-.fa-pen-to-square {
+.fa-pen-to-square,
+.fa-trash-can {
   font-size: 1.2rem;
 }
 

@@ -23,13 +23,13 @@ if (isset($_GET["edit"])) {
     if (isset($_GET["room"])) {
         $roomId = intval($_GET["room"]);
         $room = filterForId($rooms, $roomId);
-        $room["price"] = $room["price"] - $stars;
+        $room["price"] = $room["price"] - $stars; // show base price
     }
 
     if (isset($_GET["activity"])) {
         $activityId = intval($_GET["activity"]);
         $activity = filterForId($activities, $activityId);
-        $activity["price"] = $activity["price"] - $stars;
+        $activity["price"] = $activity["price"] - $stars; // show base price
     }
 }
 
@@ -49,9 +49,14 @@ if (isset($_GET["edit"])) {
                     <div class="room-card text-dark-blue">
                         <img class="room-card-image" src=<?= "./assets/images/" . $room["images"][0]; ?> alt="cabin_snow_yellow">
                         <div class="room-card-text-content">
-                            <a class="text-dark-blue" href="<?= "admin.php?form=roomForm&edit=update&room=" . $room["id"]; ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
+                            <div class="space-between">
+                                <a class="text-dark-blue" href="<?= "admin.php?form=roomForm&edit=update&room=" . $room["id"]; ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="<?= "app/deleteRoom.php?id=" . $room["id"] . "&images=" . implode(",", $room["images"]); ?>" class="text-error-red">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
                             <div class="space-between">
                                 <h3><?= $room["name"]; ?></h3>
                                 <h3><?= "$" . $room["price"]; ?></h3>
@@ -69,9 +74,14 @@ if (isset($_GET["edit"])) {
                     <div class="room-card text-dark-blue">
                         <img class="room-card-image" src=<?= "./assets/images/" . $activity["image"]; ?> alt="activity">
                         <div class="room-card-text-content">
-                            <a class="text-dark-blue" href="<?= "admin.php?form=activityForm&edit=update&activity=" . $activity["id"]; ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
+                            <div class="space-between">
+                                <a class="text-dark-blue" href="<?= "admin.php?form=activityForm&edit=update&activity=" . $activity["id"]; ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="<?= "app/deleteActivity.php?id=" . $activity["id"] . "&image=" . $activity["image"]; ?>" class="text-error-red">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
                             <div class="space-between">
                                 <h3><?= $activity["activity"]; ?></h3>
                                 <h3><?= "$" . $activity["price"]; ?></h3>

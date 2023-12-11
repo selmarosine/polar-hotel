@@ -13,3 +13,4 @@ mb_internal_encoding('UTF-8');
 require __DIR__ . '/hotelFunctions.php';
 
 $db = new PDO("sqlite:" . __DIR__ . "/database/polar-hotel.db");
+$db->exec("PRAGMA foreign_keys = ON;"); // For on delete cascade to fork
