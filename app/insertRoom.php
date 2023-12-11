@@ -8,15 +8,14 @@ require_once __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
-$stars = intval($_ENV["STARS"]) * 10;
+$stars = intval($_ENV["STARS"]);
 
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
     $images = $_FILES["images"];
     $imagesLength = count($images["name"]) <= 3 ? count($images["name"]) : 3;
 
     $name = htmlspecialchars(trim(ucfirst($_POST["name"])));
-    $originalPrice = intval($_POST["price"]);
-    $price = $originalPrice + ($originalPrice * ($stars / 100));
+    $price = intval($_POST["price"]);
     $description = htmlspecialchars(trim($_POST["description"]));
 
     $insertRoom = $db->prepare("INSERT INTO rooms (name, price, description) VALUES (:name, :price, :description)");

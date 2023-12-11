@@ -37,13 +37,13 @@ $room = reset($filteredRooms);
             <div>
                 <h3>Check in</h3>
                 <?php
-                $calendarIdentifier = "_checkin";
+                $calendarIdentifier = "-checkin";
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
             <div>
                 <h3>Check out</h3>
                 <?php
-                $calendarIdentifier = "_checkout";
+                $calendarIdentifier = "-checkout";
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
         </div>
@@ -63,7 +63,10 @@ $room = reset($filteredRooms);
             <label for="transfer-code">
                 <h3>Enter your transfer code</h3>
             </label>
-            <input class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+            <input placeholder="Code ..." value="9ca1e3d1-aa16-4455-9936-739984164f40" class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+        </div>
+        <div>
+            <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
         </div>
         <input type="hidden" name="room" value="<?= $roomId ?>">
         <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>

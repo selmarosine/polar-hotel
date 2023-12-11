@@ -1,4 +1,4 @@
-<img src="https://media4.giphy.com/media/fSHgyXYXy8Sd2/giphy.gif?cid=ecf05e47fi86i9fftmihnan0l0f36lgrx236pzsvoecq8ms0&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Polar bear" style="width: 100%" />
+<img src="https://media4.giphy.com/media/fSHgyXYXy8Sd2/giphy.gif?cid=ecf05e47fi86i9fftmihnan0l0f36lgrx236pzsvoecq8ms0&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Polar bear" style="width: 100%;" />
 
 # Svalbard
 

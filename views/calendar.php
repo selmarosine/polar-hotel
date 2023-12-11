@@ -13,7 +13,7 @@ $identifier = $calendarIdentifier ?? '';
         <div id="<?= $selectedMonth === $date["month"] ? 'btn' . $identifier : '' ?>" class="calendar-cell <?= $selectedMonth !== $date["month"] ? 'offset-month' : 'current-month contain-radio'; ?>">
             <?= $date["dayDate"] ?>
             <?php if ($selectedMonth === $date["month"]) : ?>
-                <input id="radio" class="date-radio" type="radio" name="date<?= $identifier ?>" value="<?= $date["date"] ?>">
+                <input required id="radio" class="date-radio" type="radio" name="date<?= $identifier ?>" value="<?= $date["date"] ?>">
             <?php endif; ?>
         </div>
     <?php endforeach; ?>

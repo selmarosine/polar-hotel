@@ -2,8 +2,13 @@ const hamMenuBtn = document.querySelector("#ham-menu-btn");
 const aSide = document.querySelector("#a-side");
 const aSideNav = document.querySelector("#a-side-nav");
 
-const checkOutBtns = document.querySelectorAll("#btn_checkout");
-const checkInBtns = document.querySelectorAll("#btn_checkin");
+const checkOutBtns = document.querySelectorAll("#btn-checkout");
+const checkInBtns = document.querySelectorAll("#btn-checkin");
+let checkInIndex = null;
+let checkOutIndex = null;
+
+const totalPrice = document.querySelector("#total-price");
+const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
 
 const toggleAside = () => {
   const [firstLine, secondLine, thirdLine] = hamMenuBtn.children;
@@ -36,6 +41,15 @@ const toggleDate = (date, prevSelected) => {
   date.classList.add("date-selected");
 };
 
+const priceChange = () => {
+  if (checkOutIndex === null || checkInIndex === null) return;
+
+  const daysBooked = checkOutIndex - checkInIndex;
+  const newPrice = baseRoomPrice * daysBooked;
+
+  totalPrice.textContent = `$${newPrice}`;
+};
+
 hamMenuBtn.addEventListener("click", toggleAside);
 
 window.addEventListener("resize", () => {
@@ -47,29 +61,45 @@ window.addEventListener("resize", () => {
   }
 });
 
-checkOutBtns.forEach((checkOutBtn) => {
+checkOutBtns.forEach((checkOutBtn, index) => {
   const radioBtn = checkOutBtn.querySelector("#radio");
   radioBtn.addEventListener("click", () => {
+    if (checkOutBtn.classList.contains("offset-month")) return;
     const prevSelected = [...checkOutBtns].find((check) =>
       check.classList.contains("date-selected")
     );
     toggleDate(checkOutBtn, prevSelected);
+    checkOutIndex = index + 1;
+
+    priceChange();
+
+    checkInBtns.forEach((checkIn, checkIdx) => {
+      if (checkIdx >= index) {
+        checkIn.classList.replace("current-month", "offset-month");
+      } else {
+        checkIn.classList.replace("offset-month", "current-month");
+      }
+    });
   });
 });
 
 checkInBtns.forEach((checkInBtn, index) => {
   const radioBtn = checkInBtn.querySelector("#radio");
   radioBtn.addEventListener("click", () => {
+    if (checkInBtn.classList.contains("offset-month")) return;
     const prevSelected = [...checkInBtns].find((check) =>
       check.classList.contains("date-selected")
     );
+
     toggleDate(checkInBtn, prevSelected);
+    checkInIndex = index;
+
+    priceChange();
+
     checkOutBtns.forEach((checkOut, checkIdx) => {
       if (checkIdx <= index) {
-        checkOut.setAttribute("disabled", true);
         checkOut.classList.replace("current-month", "offset-month");
       } else {
-        checkOut.setAttribute("disabled", false);
         checkOut.classList.replace("offset-month", "current-month");
       }
     });

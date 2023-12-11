@@ -95,6 +95,9 @@ header {
   color: var(--white);
   position: fixed;
   top: 0;
+  left: 0;
+  z-index: 50;
+  overflow-x: hidden;
 }
 
 aside {
@@ -459,7 +462,7 @@ aside nav {
 
 .room-activities {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 16px;
 }
 
