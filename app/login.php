@@ -19,9 +19,9 @@ if (isset($_POST["password"])) {
 
     if ($password === $_ENV["API_KEY"]) {
         $_SESSION["admin"] = true;
-        redirect("/admin.php");
+        redirect("../admin.php");
     }
 }
 
 $_SESSION["loginError"] = true;
-redirect("/login.php");
+redirect("../login.php");

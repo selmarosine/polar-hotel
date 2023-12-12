@@ -46,7 +46,7 @@ $room = filterForId($rooms, $roomId);
             <?php foreach ($activities as $activity) : ?>
                 <div class="room-activities-card">
                     <img src="<?= "assets/images/" . $activity["image"] ?>" alt="activity">
-                    <input type="checkbox" name="activity" value="<?= $activity["id"] ?>">
+                    <input data-price="<?= $activity["price"]; ?>" id="activity-check" type="checkbox" name="activity" value="<?= $activity["id"] ?>">
                     <div><?= "$" . $activity["price"] . " - " . $activity["activity"] ?></div>
                     <a href="activities.php" class="text-dark-blue flex-grow">
                         <i class="fa-solid fa-link"></i>

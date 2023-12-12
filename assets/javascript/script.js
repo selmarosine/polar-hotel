@@ -7,9 +7,12 @@ const checkInBtns = document.querySelectorAll("#btn-checkin");
 let checkInIndex = null;
 let checkOutIndex = null;
 
+const activityChecks = document.querySelectorAll("#activity-check");
+let activityTotal = 0;
 const totalPrice = document.querySelector("#total-price");
+let baseRoomPrice = null;
 if (totalPrice !== null) {
-  const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
+  baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
 }
 
 const toggleAside = () => {
@@ -49,7 +52,7 @@ const priceChange = () => {
   const daysBooked = checkOutIndex - checkInIndex;
   const newPrice = baseRoomPrice * daysBooked;
 
-  totalPrice.textContent = `$${newPrice}`;
+  totalPrice.textContent = `$${newPrice + activityTotal}`;
 };
 
 hamMenuBtn.addEventListener("click", toggleAside);
@@ -105,5 +108,20 @@ checkInBtns.forEach((checkInBtn, index) => {
         checkOut.classList.replace("offset-month", "current-month");
       }
     });
+  });
+});
+
+activityChecks.forEach((activityCheck) => {
+  activityCheck.addEventListener("click", () => {
+    const price = parseInt(activityCheck.getAttribute("data-price"));
+    const originalPrice = parseInt(totalPrice.textContent.split("$")[1]);
+
+    activityTotal = activityCheck.checked
+      ? activityTotal + price
+      : activityTotal - price;
+
+    totalPrice.textContent = `$${
+      activityCheck.checked ? originalPrice + price : originalPrice - price
+    }`;
   });
 });
