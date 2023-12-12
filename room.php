@@ -7,7 +7,7 @@ require_once __DIR__ . "/views/navigation.php";
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getActivities.php";
 
-$roomId = intval($_GET["room"]);
+$roomId = $_GET["room"];
 
 $room = filterForId($rooms, $roomId);
 

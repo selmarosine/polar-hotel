@@ -408,6 +408,25 @@ aside nav {
   text-align: center;
 }
 
+.hotel-data-container {
+  background: var(--blue);
+  padding: 8px;
+  border-radius: var(--rounded-sm);
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hotel-data-cell {
+  background: var(--white);
+  color: var(--dark-blue);
+  border-radius: var(--rounded-sm);
+  padding: 8px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
 /* ---- Room ---- */
 .room-main {
   min-height: 100vh;

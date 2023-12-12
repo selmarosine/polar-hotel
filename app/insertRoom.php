@@ -11,20 +11,20 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
     $name = htmlspecialchars(trim(ucfirst($_POST["name"])));
     $price = intval($_POST["price"]);
     $description = htmlspecialchars(trim($_POST["description"]));
+    $roomId = guidv4();
 
-    $insertRoom = $db->prepare("INSERT INTO rooms (name, price, description) VALUES (:name, :price, :description)");
+    $insertRoom = $db->prepare("INSERT INTO rooms (id, name, price, description) VALUES (:id, :name, :price, :description)");
+    $insertRoom->bindParam(":id", $roomId, PDO::PARAM_STR);
     $insertRoom->bindParam(":name", $name, PDO::PARAM_STR);
     $insertRoom->bindParam(":price", $price, PDO::PARAM_INT);
     $insertRoom->bindParam(":description", $description, PDO::PARAM_STR);
     $insertRoom->execute();
 
-    $roomId = $db->lastInsertId();
-
     for ($idx = 0; $idx < $imagesLength; $idx++) {
-        $imageName = uniqid() . "-" . $images["name"][$idx];
+        $imageName = guidv4() . "-" . $images["name"][$idx];
 
         $insertImage = $db->prepare("INSERT INTO image_room (room_id, image) VALUES (:room_id, :image)");
-        $insertImage->bindParam(":room_id", $roomId, PDO::PARAM_INT);
+        $insertImage->bindParam(":room_id", $roomId, PDO::PARAM_STR);
         $insertImage->bindParam(":image", $imageName, PDO::PARAM_STR);
         $insertImage->execute();
 

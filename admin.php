@@ -4,12 +4,6 @@ require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
 require_once __DIR__ . "/vendor/autoload.php";
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-$stars = intval($_ENV["STARS"]);
-
-
 if (!isset($_SESSION["admin"])) {
     redirect("/login.php");
 }
@@ -17,26 +11,53 @@ if (!isset($_SESSION["admin"])) {
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getActivities.php";
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$stars = intval($_ENV["STARS"]);
+
+use GuzzleHttp\Client;
+
+$client = new Client([
+    "base_uri" => "https://www.yrgopelag.se/centralbank/"
+]);
+
 $form = isset($_GET["form"]) ? $_GET["form"] : "roomForm";
 
 if (isset($_GET["edit"])) {
     if (isset($_GET["room"])) {
-        $roomId = intval($_GET["room"]);
+        $roomId = $_GET["room"];
         $room = filterForId($rooms, $roomId);
         $room["price"] = $room["price"] - $stars; // show base price
     }
 
     if (isset($_GET["activity"])) {
-        $activityId = intval($_GET["activity"]);
+        $activityId = $_GET["activity"];
         $activity = filterForId($activities, $activityId);
         $activity["price"] = $activity["price"] - $stars; // show base price
     }
 }
 
+$request = $client->post("accountInfo.php", [
+    "form_params" => [
+        "user" => $_ENV["USER_NAME"],
+        "api_key" => $_ENV["API_KEY"],
+        "checkAccount" => ""
+    ]
+]);
+
+$bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
+
 ?>
 
 <main class="admin-main">
     <section class="max-w-section admin-section">
+        <div class="hotel-data-container">
+            <div class="hotel-data-cell space-between">
+                <span>Bank account</span>
+                <span><?= "$" . $bankAccount; ?></span>
+            </div>
+        </div>
         <div class="flex-md admin-form-selector-container">
             <a href="admin.php?form=roomForm" class="submit-btn-blue form-selector">Room</a>
             <a href="admin.php?form=activityForm" class="submit-btn-blue form-selector">Activity</a>

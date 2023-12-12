@@ -6,11 +6,7 @@ require_once __DIR__ . "/autoload.php";
 
 if (isset($_GET["id"], $_GET["images"])) {
     $images = explode(",", $_GET["images"]);
-    $id = intval($_GET["id"]);
-
-    if (!is_numeric($id)) {
-        redirect("/admin.php");
-    }
+    $id = $_GET["id"];
 
     foreach ($images as $image) {
         $path = __DIR__ . "/../assets/images/" . $image;
@@ -22,7 +18,7 @@ if (isset($_GET["id"], $_GET["images"])) {
 
     $deleteRoom = $db->prepare("DELETE FROM rooms WHERE id = :id");
 
-    $deleteRoom->bindParam(":id", $id);
+    $deleteRoom->bindParam(":id", $id, PDO::PARAM_STR);
     $deleteRoom->execute();
 }
 

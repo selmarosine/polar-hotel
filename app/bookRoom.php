@@ -54,7 +54,6 @@ if (isset($_POST["date-checkin"], $_POST["date-checkout"], $_POST["transfer-code
             ]
         ]);
     } catch (ClientException $e) {
-        // If bank is down save codes locally for later deposit
         echo $e->getResponse()->getBody()->getContents();
     }
 }
