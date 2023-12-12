@@ -10,6 +10,12 @@ require __DIR__ . "/app/getActivities.php";
 $roomId = intval($_GET["room"]);
 
 $room = filterForId($rooms, $roomId);
+
+$errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
+unset($_SESSION["bookingErrors"]);
+
+$successMessage = isset($_SESSION["bookingSuccess"]) ? $_SESSION["bookingSuccess"] : "";
+unset($_SESSION["bookingSuccess"]);
 ?>
 
 <main class="room-main max-w-section">
@@ -27,7 +33,7 @@ $room = filterForId($rooms, $roomId);
             <?php endforeach; ?>
         </div>
     </div>
-    <form method="post" class="book-room-form">
+    <form method="post" class="book-room-form" action="app/bookRoom.php">
         <div class="check-in-out-calenders">
             <div>
                 <h3>Check in</h3>
@@ -46,7 +52,7 @@ $room = filterForId($rooms, $roomId);
             <?php foreach ($activities as $activity) : ?>
                 <div class="room-activities-card">
                     <img src="<?= "assets/images/" . $activity["image"] ?>" alt="activity">
-                    <input data-price="<?= $activity["price"]; ?>" id="activity-check" type="checkbox" name="activity" value="<?= $activity["id"] ?>">
+                    <input data-price="<?= $activity["price"]; ?>" class="activity-check" type="checkbox" name="activities[]" value="<?= $activity["id"] ?>">
                     <div><?= "$" . $activity["price"] . " - " . $activity["activity"] ?></div>
                     <a href="activities.php" class="text-dark-blue flex-grow">
                         <i class="fa-solid fa-link"></i>
@@ -58,10 +64,15 @@ $room = filterForId($rooms, $roomId);
             <label for="transfer-code">
                 <h3>Enter your transfer code</h3>
             </label>
-            <input placeholder="Code ..." value="9ca1e3d1-aa16-4455-9936-739984164f40" class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+            <input placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
         </div>
         <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
+        <?php require __DIR__ . "/views/errorMessages.php"; ?>
+        <?php if (strlen($successMessage) > 0) : ?>
+            <div class="success-message"><?= $successMessage; ?></div>
+        <?php endif; ?>
         <input type="hidden" name="room" value="<?= $roomId ?>">
+        <input type="hidden" name="total-cost" id="total-cost" value="<?= $room["price"] ?>">
         <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>
     </form>
 </main>

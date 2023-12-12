@@ -9,7 +9,7 @@ if (isset($_GET["id"], $_GET["images"])) {
     $id = intval($_GET["id"]);
 
     if (!is_numeric($id)) {
-        return;
+        redirect("/admin.php");
     }
 
     foreach ($images as $image) {

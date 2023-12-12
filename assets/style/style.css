@@ -171,6 +171,28 @@ aside nav {
   width: calc(21px * 1.41421356237);
 }
 
+.error-msg-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-msg-card {
+  padding: 8px;
+  background: rgb(255, 121, 121);
+  color: var(--white);
+  border: 1px solid red;
+  border-radius: var(--rounded-sm);
+}
+
+.success-message {
+  padding: 8px;
+  background: rgb(94, 255, 126);
+  color: green;
+  border: 1px solid green;
+  border-radius: var(--rounded-sm);
+}
+
 /* ---- Hero section ---- */
 .hero {
   display: flex;

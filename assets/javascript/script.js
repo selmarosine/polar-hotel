@@ -7,9 +7,10 @@ const checkInBtns = document.querySelectorAll("#btn-checkin");
 let checkInIndex = null;
 let checkOutIndex = null;
 
-const activityChecks = document.querySelectorAll("#activity-check");
+const activityChecks = document.querySelectorAll(".activity-check");
 let activityTotal = 0;
 const totalPrice = document.querySelector("#total-price");
+const totalCost = document.querySelector("#total-cost");
 let baseRoomPrice = null;
 if (totalPrice !== null) {
   baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
@@ -50,9 +51,11 @@ const priceChange = () => {
   if (checkOutIndex === null || checkInIndex === null) return;
 
   const daysBooked = checkOutIndex - checkInIndex;
-  const newPrice = baseRoomPrice * daysBooked;
+  const newPrice = baseRoomPrice * daysBooked + activityTotal;
 
-  totalPrice.textContent = `$${newPrice + activityTotal}`;
+  totalCost.value = newPrice;
+
+  totalPrice.textContent = `$${newPrice}`;
 };
 
 hamMenuBtn.addEventListener("click", toggleAside);
@@ -67,7 +70,7 @@ window.addEventListener("resize", () => {
 });
 
 checkOutBtns.forEach((checkOutBtn, index) => {
-  const radioBtn = checkOutBtn.querySelector("#radio");
+  const radioBtn = checkOutBtn.querySelector(".radio");
   radioBtn.addEventListener("click", () => {
     if (checkOutBtn.classList.contains("offset-month")) return;
     const prevSelected = [...checkOutBtns].find((check) =>
@@ -89,7 +92,7 @@ checkOutBtns.forEach((checkOutBtn, index) => {
 });
 
 checkInBtns.forEach((checkInBtn, index) => {
-  const radioBtn = checkInBtn.querySelector("#radio");
+  const radioBtn = checkInBtn.querySelector(".radio");
   radioBtn.addEventListener("click", () => {
     if (checkInBtn.classList.contains("offset-month")) return;
     const prevSelected = [...checkInBtns].find((check) =>
@@ -116,12 +119,17 @@ activityChecks.forEach((activityCheck) => {
     const price = parseInt(activityCheck.getAttribute("data-price"));
     const originalPrice = parseInt(totalPrice.textContent.split("$")[1]);
 
+    // Save activity prices on global scope for check in/out price.
     activityTotal = activityCheck.checked
       ? activityTotal + price
       : activityTotal - price;
 
-    totalPrice.textContent = `$${
-      activityCheck.checked ? originalPrice + price : originalPrice - price
-    }`;
+    const newPrice = activityCheck.checked
+      ? originalPrice + price
+      : originalPrice - price;
+
+    totalCost.value = newPrice;
+
+    totalPrice.textContent = `$${newPrice}`;
   });
 });

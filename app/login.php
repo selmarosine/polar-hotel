@@ -13,7 +13,7 @@ if (isset($_POST["password"])) {
     unset($_POST["password"]);
 
     if (!isValidUuid($password)) {
-        $_SESSION["loginError"] = true;
+        $_SESSION["loginError"][] = "Password incorrect, is this really an admin ?";
         redirect("/login.php");
     }
 
@@ -23,5 +23,4 @@ if (isset($_POST["password"])) {
     }
 }
 
-$_SESSION["loginError"] = true;
-redirect("../login.php");
+redirect("/login.php");

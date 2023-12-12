@@ -9,7 +9,7 @@ if (isset($_GET["id"], $_GET["image"])) {
     $id = intval($_GET["id"]);
 
     if (!is_numeric($id)) {
-        return;
+        redirect("/admin.php");
     }
 
     if (file_exists($image)) {

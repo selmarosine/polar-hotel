@@ -11,7 +11,7 @@
             <input value="<?= isset($room) ? $room["name"] : ""; ?>" class="room-name-input" autocomplete="off" required type="text" name="name" id="name">
         </div>
         <div class="column create-room-input">
-            <label for="price">Price + 10% per star</label>
+            <label for="price">Price + $1 per star</label>
             <input value="<?= isset($room) ? $room["price"] : ""; ?>" type="number" name="price" id="price" min="1" max="100" value="1">
         </div>
     </div>
