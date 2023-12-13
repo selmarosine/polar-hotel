@@ -4,12 +4,12 @@
     <a href="index.php" class="nav-logo">Polar Hotel</a>
     <aside id="a-side">
         <nav id="a-side-nav">
-            <a href="activities.php">Activities</a>
-            <a href="#">Offers</a>
+            <a class="mobile-nav-a" href="activities.php">Activities</a>
+            <div class="line-break"></div>
             <?php if (isset($_SESSION["admin"])) : ?>
-                <a href="admin.php">Admin</a>
+                <a class="mobile-nav-a" href="admin.php">Admin</a>
             <?php endif; ?>
-            <a href=<?= isset($_SESSION["admin"]) ? "app/logout.php" : "login.php" ?>><?= isset($_SESSION["admin"]) ? "Sign out" : "Sign in" ?></a>
+            <a class="mobile-nav-a" href=<?= isset($_SESSION["admin"]) ? "app/logout.php" : "login.php" ?>><?= isset($_SESSION["admin"]) ? "Sign out" : "Sign in" ?></a>
         </nav>
     </aside>
     <div id="ham-menu-btn" class="ham-menu">
@@ -19,7 +19,6 @@
     </div>
     <nav class="desktop-nav">
         <a href="activities.php">Activities</a>
-        <a href="#">Offers</a>
         <?php if (isset($_SESSION["admin"])) : ?>
             <a href="admin.php">Admin</a>
         <?php endif; ?>

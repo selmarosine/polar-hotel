@@ -39,12 +39,15 @@ h3 {
   font-weight: 600;
 }
 
-button {
+button,
+input[type="checkbox"] {
   border: none;
   cursor: pointer;
 }
 
 button,
+input,
+select,
 input,
 textarea {
   outline: none;
@@ -89,6 +92,28 @@ textarea {
   color: var(--dark-blue);
 }
 
+.error-msg-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-msg-card {
+  padding: 8px;
+  background: rgb(255, 121, 121);
+  color: var(--white);
+  border: 1px solid red;
+  border-radius: var(--rounded-sm);
+}
+
+.success-message {
+  padding: 8px;
+  background: rgb(94, 255, 126);
+  color: green;
+  border: 1px solid green;
+  border-radius: var(--rounded-sm);
+}
+
 /* ---- Header ---- */
 header {
   display: flex;
@@ -123,10 +148,28 @@ aside nav {
   background: var(--dark-blue);
   display: flex;
   flex-direction: column;
-  gap: 24;
+  gap: 8px;
   padding: 24px;
   transform: translateX(100%);
   transition: all 0.3s ease-in;
+}
+
+.line-break {
+  width: 100%;
+  height: 1px;
+  background: var(--white);
+  margin: 0 8px;
+}
+
+.mobile-nav-a {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: var(--rounded-sm);
+}
+
+.mobile-nav-a:active {
+  background: rgb(5, 0, 58);
 }
 
 .nav-logo {
@@ -169,28 +212,6 @@ aside nav {
 .ham-line-bottom {
   transform: rotate(45deg) translateY(2px);
   width: calc(21px * 1.41421356237);
-}
-
-.error-msg-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.error-msg-card {
-  padding: 8px;
-  background: rgb(255, 121, 121);
-  color: var(--white);
-  border: 1px solid red;
-  border-radius: var(--rounded-sm);
-}
-
-.success-message {
-  padding: 8px;
-  background: rgb(94, 255, 126);
-  color: green;
-  border: 1px solid green;
-  border-radius: var(--rounded-sm);
 }
 
 /* ---- Hero section ---- */
@@ -359,13 +380,14 @@ aside nav {
   padding: 32px 0;
 }
 
-.create-room-input label {
+.create-room-label {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 8px;
 }
 
 .create-room-input input,
+.create-room-input select,
 .create-room-input textarea {
   font-size: 18px;
   padding: 8px;
@@ -425,6 +447,31 @@ aside nav {
   padding: 8px;
   font-weight: 500;
   font-size: 18px;
+}
+
+.offers-admin-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.offers-admin-container > div {
+  padding: 8px;
+  background: var(--white);
+  color: var(--dark-blue);
+  border-radius: var(--rounded-sm);
+}
+
+.form-active {
+  background: var(--white);
+  color: var(--dark-blue);
+}
+
+.admin-offer-card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* ---- Room ---- */
@@ -579,7 +626,7 @@ aside nav {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 64px;
+  padding-bottom: 24px;
 }
 
 .activity-card {

@@ -1,19 +1,8 @@
 <?php
 
-/*
-Here's something to start your career as a hotel manager.
-
-One function to connect to the database you want (it will return a PDO object which you then can use.)
-    For instance: $db = connect('hotel.db');
-                  $db->prepare("SELECT * FROM bookings");
-
-one function to create a guid,
-and one function to control if a guid is valid.
-*/
-
 function connect(string $dbName): object
 {
-    $dbPath = __DIR__ . '/' . $dbName;
+    $dbPath = __DIR__ . "/database/$dbName";
     $db = "sqlite:$dbPath";
 
     // Open the database file and catch the exception if it fails.
@@ -21,6 +10,7 @@ function connect(string $dbName): object
         $db = new PDO($db);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $db->exec("PRAGMA foreign_keys = ON;"); // For on delete cascade to fork
     } catch (PDOException $e) {
         echo "Failed to connect to the database";
         throw $e;

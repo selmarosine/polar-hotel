@@ -14,7 +14,3 @@ $selectActivities = $db->query("SELECT * FROM activities");
 $selectActivities->execute();
 
 $activities = $selectActivities->fetchAll(PDO::FETCH_ASSOC);
-
-$activities = array_map(function (array $activity) use ($stars) {
-    return [...$activity, "price" => $activity["price"] = $activity["price"] + $stars];
-}, $activities);

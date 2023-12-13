@@ -53,7 +53,7 @@ unset($_SESSION["bookingSuccess"]);
                 <div class="room-activities-card">
                     <img src="<?= "assets/images/" . $activity["image"] ?>" alt="activity">
                     <input data-price="<?= $activity["price"]; ?>" class="activity-check" type="checkbox" name="activities[]" value="<?= $activity["id"] ?>">
-                    <div><?= "$" . $activity["price"] . " - " . $activity["activity"] ?></div>
+                    <div><?= "$" . $activity["price"] . " - " . $activity["name"] ?></div>
                     <a href="activities.php" class="text-dark-blue flex-grow">
                         <i class="fa-solid fa-link"></i>
                     </a>

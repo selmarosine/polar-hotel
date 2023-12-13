@@ -30,6 +30,8 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
 
         move_uploaded_file($images['tmp_name'][$idx], __DIR__ . "/../assets/images/" . $imageName);
     }
+    redirect("/admin.php?form=roomForm");
 }
 
-redirect("/admin.php");
+$_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again.";
+redirect("/admin.php?form=roomForm");

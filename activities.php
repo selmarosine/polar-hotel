@@ -12,7 +12,7 @@ require __DIR__ . "/app/getActivities.php";
             <div class="activity-card">
                 <img src=<?= "assets/images/" . $activity["image"] ?> alt="activity">
                 <div class="activity-card-info">
-                    <h3><?= $activity["activity"]; ?></h3>
+                    <h3><?= $activity["name"]; ?></h3>
                     <div class="price-sm"><?= "$" . $activity["price"]; ?></div>
                     <p><?= $activity["description"]; ?></p>
                 </div>
