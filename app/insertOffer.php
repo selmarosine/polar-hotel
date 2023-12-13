@@ -27,7 +27,7 @@ if (isset($_GET["name"], $_GET["discount"], $_GET["requirement"], $_GET["amount"
     $insertOfferRooms = $db->prepare("INSERT INTO offer_room (offer_id, room_id) VALUES $placeHolder");
     $insertOfferRooms->execute(array_merge(...$offerRooms));
 
-    $_SESSION["adminFormSuccess"] = "Offer created successfully";
+    $_SESSION["adminFormSuccess"] = "Discount created successfully";
     redirect("/admin.php?form=offerForm");
 }
 

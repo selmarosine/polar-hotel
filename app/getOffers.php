@@ -29,3 +29,5 @@ foreach ($offers as $offer) {
 
 // Return array with out associative keys
 $offers = array_values($mappedOffers);
+
+unset($offer);

@@ -44,6 +44,10 @@ if (isset($_GET["edit"])) {
         $activityId = $_GET["activity"];
         $activity = filterForId($activities, $activityId);
     }
+    if (isset($_GET["offer"])) {
+        $offerId = $_GET["offer"];
+        $offer = filterForId($offers, $offerId);
+    }
 }
 
 $request = $client->post("accountInfo.php", [
@@ -137,7 +141,7 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
                     <div class="room-card text-dark-blue admin-offer-card">
                         <div>
                             <div class="space-between">
-                                <a class="text-dark-blue" href="#">
+                                <a class="text-dark-blue" href="<?= "admin.php?form=offerForm&edit=update&offer=" . $offer["id"]; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a href="#" class="text-error-red">
@@ -146,16 +150,21 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
                             </div>
                             <div>
                                 <h3><?= $offer["name"] ?></h3>
-                                <div class="space-between">
+                                <div class="space-between text-offer-info">
                                     <div><?= "Discount %" . $offer["discount"] ?></div>
                                     <div><?= $offer["requirement"] . " - " . $offer["requirement_amount"] ?></div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <?php foreach ($offer["rooms"] as $room) : ?>
-                                <div><?= $room; ?></div>
-                            <?php endforeach; ?>
+                            <h3>Offer is valid for</h3>
+                            <?php foreach ($rooms as $room) :
+                                if (in_array($room["id"], $offer["rooms"])) :
+                            ?>
+                                    <div class="text-offer-info"><?= $room["name"]; ?></div>
+                            <?php
+                                endif;
+                            endforeach; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

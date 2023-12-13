@@ -474,6 +474,10 @@ aside nav {
   gap: 16px;
 }
 
+.text-offer-info {
+  font-size: 18px;
+}
+
 /* ---- Room ---- */
 .room-main {
   min-height: 100vh;

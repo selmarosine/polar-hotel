@@ -20,4 +20,4 @@ if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_POST["id"]))
     $updateRoom->execute();
 }
 
-redirect("/admin.php");
+redirect("/admin.php?form=roomForm");
