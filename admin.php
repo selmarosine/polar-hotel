@@ -144,7 +144,7 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
                                 <a class="text-dark-blue" href="<?= "admin.php?form=offerForm&edit=update&offer=" . $offer["id"]; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <a href="#" class="text-error-red">
+                                <a href="<?= "app/deleteOffer.php?id=" . $offer["id"]; ?>" class="text-error-red">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </div>
