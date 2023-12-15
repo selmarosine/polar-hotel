@@ -64,16 +64,18 @@ function getMonth(int $monthIndex, int $year): array
     $monthLength = cal_days_in_month(CAL_GREGORIAN, $monthIndex, $year); // Length of the selected month
     $month = [];
 
-    $firstDay = date("N", mktime(0, 0, 0, $monthIndex, 1, $year));
+    $firstDay = date("N", mktime(0, 0, 0, $monthIndex, 1, $year)); // returns a number 1 - 7 representing Monday - Sunday depending on the date
 
     // Days before and after the selected month
-    $daysBefore = $firstDay - 1;
-    $daysAfter = 42 - $monthLength - $daysBefore;
+    $daysBefore = $firstDay - 1; // To fill the first week of the selected month
+    $daysAfter = 42 - $monthLength - $daysBefore; // Fill out the rest of the 6 weeks
 
     // Days before current selected month
-    for ($idx = $daysBefore; $idx > 0; $idx--) {
-        $timeStamp = mktime(0, 0, 0, $monthIndex, 1 - $idx, $year);
-        $month[] = monthArrayDate($timeStamp);
+    if ($daysBefore > 0) {
+        for ($idx = $daysBefore; $idx > 0; $idx--) {
+            $timeStamp = mktime(0, 0, 0, $monthIndex, 1 - $idx, $year);
+            $month[] = monthArrayDate($timeStamp);
+        }
     }
 
     // Selected month
@@ -83,9 +85,11 @@ function getMonth(int $monthIndex, int $year): array
     }
 
     // Days after selected month
-    for ($idx = 1; $idx <= $daysAfter; $idx++) {
-        $timeStamp = mktime(0, 0, 0, $monthIndex, $monthLength + $idx, $year);
-        $month[] = monthArrayDate($timeStamp);
+    if ($daysAfter > 0) {
+        for ($idx = 1; $idx <= $daysAfter; $idx++) {
+            $timeStamp = mktime(0, 0, 0, $monthIndex, $monthLength + $idx, $year);
+            $month[] = monthArrayDate($timeStamp);
+        }
     }
 
     return $month;

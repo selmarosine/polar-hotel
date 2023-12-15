@@ -267,6 +267,12 @@ aside nav {
   font-size: 1rem;
   font-weight: 600;
   border-radius: var(--rounded-sm);
+  transition: all 0.3s;
+}
+
+.submit-btn-blue:hover {
+  transition: all 0.3s;
+  filter: brightness(1.1);
 }
 
 .sort-btn-stroke {
@@ -623,6 +629,33 @@ aside nav {
   padding: 8px;
   font-size: 18px;
   font-weight: 500;
+}
+
+.room-discount-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.room-discount-card {
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: var(--rounded-sm);
+  background: var(--dark-blue);
+  color: var(--white);
+}
+
+.cart-btn {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.discount-text {
+  color: rgb(216, 71, 71);
+  font-size: 18px;
 }
 
 /* ---- Activities ---- */

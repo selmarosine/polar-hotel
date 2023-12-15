@@ -1,12 +1,10 @@
 <?php
 
 $selectedMonth = intval(date("m", mktime(0, 0, 0, 1, 1, 2024)));
-$selectedYear = intval(date("Y", mktime(0, 0, 0, 1, 1, 2024)));
-$month = getMonth($selectedMonth, $selectedYear);
+$selectedYear = 2024;
+$month = getMonth($selectedMonth, $selectedYear); // Create calender array
 
-$identifier = $calendarIdentifier ?? '';
-
-// Looping 42 times to get 6 rows with 7 columns for calender view
+$identifier = $calendarIdentifier ?? ''; // If the calender is for check in or out.
 ?>
 <div class="calendar-grid">
     <?php foreach ($month as $date) : ?>

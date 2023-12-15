@@ -6,10 +6,17 @@ require_once __DIR__ . "/views/navigation.php";
 
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getActivities.php";
+require __DIR__ . "/app/getOffers.php";
 
+// Filter for room
 $roomId = $_GET["room"];
 
 $room = filterForId($rooms, $roomId);
+
+// Filter for discount for room
+$roomOffers = array_filter($offers, function ($offer) use ($room) {
+    return in_array($room["id"], $offer["rooms"]);
+});
 
 $errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
 unset($_SESSION["bookingErrors"]);
@@ -20,12 +27,22 @@ unset($_SESSION["bookingSuccess"]);
 
 <main class="room-main max-w-section">
     <div class="room-content-order">
-        <div class="column room-info-container">
-            <div class="space-between name-price-title">
-                <h1><?= $room["name"]; ?></h1>
-                <h3><?= "$" . $room["price"]; ?></h3>
+        <div class="column room-info-container space-between">
+            <div>
+                <div class="space-between name-price-title">
+                    <h1><?= $room["name"]; ?></h1>
+                    <h3><?= "$" . $room["price"]; ?></h3>
+                </div>
+                <div><?= $room["description"]; ?></div>
             </div>
-            <div><?= $room["description"]; ?></div>
+            <?php if (count($roomOffers) > 0) : ?>
+                <div class="room-discount-container">
+                    <h3 class="room-discount-title">Discounts for <?= $room["name"]; ?></h3>
+                    <?php foreach ($roomOffers as $roomOffer) : ?>
+                        <div class="room-discount-card"><?= $roomOffer["name"]; ?></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="room-gallery-grid">
             <?php foreach ($room["images"] as $image) : ?>
@@ -66,15 +83,22 @@ unset($_SESSION["bookingSuccess"]);
             </label>
             <input placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
         </div>
-        <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
+        <div class="space-between">
+            <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
+            <div id="discount-sum" class="discount-text"></div>
+        </div>
         <?php require __DIR__ . "/views/errorMessages.php"; ?>
         <?php if (strlen($successMessage) > 0) : ?>
             <div class="success-message"><?= $successMessage; ?></div>
         <?php endif; ?>
         <input type="hidden" name="room" value="<?= $roomId ?>">
         <input type="hidden" name="total-cost" id="total-cost" value="<?= $room["price"] ?>">
-        <button type="submit" class="submit-btn-blue">Book <?= $room["name"] ?></button>
+        <button type="submit" class="submit-btn-blue cart-btn">Book <?= $room["name"]; ?></i></button>
     </form>
 </main>
+<script>
+    const offers = <?= json_encode($roomOffers); ?>; // To handle active discount when user is booking room.
+</script>
+<script src="assets/javascript/room.js"></script>
 
 <?php require_once __DIR__ . "/views/footer.php"; ?>
