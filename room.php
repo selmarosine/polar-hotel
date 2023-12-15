@@ -13,6 +13,9 @@ $roomId = $_GET["room"];
 
 $room = filterForId($rooms, $roomId);
 
+// getBookedRooms.php depends on having $room["id"], there fore requiring it after $room is set
+require __DIR__ . "/app/getBookedRooms.php";
+
 // Filter for discount for room
 $roomOffers = array_filter($offers, function ($offer) use ($room) {
     return in_array($room["id"], $offer["rooms"]);
@@ -55,13 +58,13 @@ unset($_SESSION["bookingSuccess"]);
             <div>
                 <h3>Check in</h3>
                 <?php
-                $calendarIdentifier = "-checkin";
+                $calendarIdentifier = "check_in";
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
             <div>
                 <h3>Check out</h3>
                 <?php
-                $calendarIdentifier = "-checkout";
+                $calendarIdentifier = "check_out";
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
         </div>

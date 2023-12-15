@@ -103,3 +103,14 @@ function filterForId(array $arrays, string $arrayId): array
 
     return reset($filteredArray);
 }
+
+function isDateBooked(int $date, array $bookedCheckIn, array $bookedCheckOut): bool
+{
+    foreach ($bookedCheckIn as $index => $checkIn) {
+        $checkOut = $bookedCheckOut[$index];
+        if ($date >= strtotime($checkIn) && $date <= strtotime($checkOut)) {
+            return true;
+        }
+    }
+    return false;
+}

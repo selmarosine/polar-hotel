@@ -1,5 +1,5 @@
-const checkOutBtns = document.querySelectorAll("#btn-checkout");
-const checkInBtns = document.querySelectorAll("#btn-checkin");
+const checkOutBtns = document.querySelectorAll("#btn_check_out");
+const checkInBtns = document.querySelectorAll("#btn_check_in");
 let checkInIndex = null;
 let checkOutIndex = null;
 

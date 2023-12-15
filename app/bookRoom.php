@@ -29,33 +29,41 @@ if (isset($_POST["date-checkin"], $_POST["date-checkout"], $_POST["transfer-code
         redirect("/room.php?room=" . $roomId);
     }
 
-    // Check if code is valid in bank
-    try {
-        $request = $client->post("transferCode", [
-            'form_params' => [
-                'transferCode' => $transferCode,
-                'totalcost' => $totalCost
-            ],
-        ]);
+    $insertBooking = $db->prepare("INSERT INTO booked_rooms (check_in, check_out, total_cost, room_id) VALUES (:check_in, :check_out, :total_cost, :room_id)");
+    $insertBooking->bindParam(":check_in", $checkIn, PDO::PARAM_STR);
+    $insertBooking->bindParam(":check_out", $checkOut, PDO::PARAM_STR);
+    $insertBooking->bindParam(":total_cost", $totalCost, PDO::PARAM_INT);
+    $insertBooking->bindParam(":room_id", $roomId, PDO::PARAM_STR);
+    $insertBooking->execute();
 
-        $response = json_decode($request->getBody()->getContents(), true);
-        $_SESSION["bookingSuccess"] = "You have successful booked your stay at Polar Hotel from $checkIn to $checkOut.";
-    } catch (ClientException $e) {
-        $_SESSION["bookingErrors"][] = "This is not a valid transfer code,  please check with you bank for a new code.";
-        redirect("/room.php?room=" . $roomId);
-    }
+    // // Check if code is valid in bank
+    // try {
+    //     $request = $client->post("transferCode", [
+    //         'form_params' => [
+    //             'transferCode' => $transferCode,
+    //             'totalcost' => $totalCost
+    //         ],
+    //     ]);
 
-    // Make me some money :)
-    try {
-        $deposit = $client->post("deposit", [
-            "form_params" => [
-                "user" => $_ENV["USER_NAME"],
-                "transferCode" => $response["transferCode"]
-            ]
-        ]);
-    } catch (ClientException $e) {
-        echo $e->getResponse()->getBody()->getContents();
-    }
+    //     $response = json_decode($request->getBody()->getContents(), true);
+    //     $_SESSION["bookingSuccess"] = "You have successful booked your stay at Polar Hotel from $checkIn to $checkOut.";
+    // } catch (ClientException $e) {
+    //     $_SESSION["bookingErrors"][] = "This is not a valid transfer code,  please check with you bank for a new code.";
+    //     redirect("/room.php?room=" . $roomId);
+    // }
+
+    // // Deposit money
+    // try {
+    //     $deposit = $client->post("deposit", [
+    //         "form_params" => [
+    //             "user" => $_ENV["USER_NAME"],
+    //             "transferCode" => $response["transferCode"]
+    //         ]
+    //     ]);
+    // } catch (ClientException $e) {
+    //     $_SESSION["bookingErrors"][] = "Error while booking your room, please try again.";
+    //     redirect("/room.php?room=" . $roomId);
+    // }
 }
 
 redirect("/room.php?room=" . $roomId);

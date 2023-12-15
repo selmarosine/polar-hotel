@@ -353,6 +353,12 @@ aside nav {
   text-align: center;
 }
 
+.date-is-booked {
+  background: var(--dark-blue);
+  color: var(--white);
+  cursor: default;
+}
+
 /* ---- Login ---- */
 .admin-main {
   min-height: 100vh;
