@@ -16,6 +16,9 @@ $room = filterForId($rooms, $roomId);
 // getBookedRooms.php depends on having $room["id"], there fore requiring it after $room is set
 require __DIR__ . "/app/getBookedRooms.php";
 
+$bookedCheckIn = array_column($bookedRooms, "check_in");
+$bookedCheckOut = array_column($bookedRooms, "check_out");
+
 // Filter for discount for room
 $roomOffers = array_filter($offers, function ($offer) use ($room) {
     return in_array($room["id"], $offer["rooms"]);
@@ -101,6 +104,8 @@ unset($_SESSION["bookingSuccess"]);
 </main>
 <script>
     const offers = <?= json_encode($roomOffers); ?>; // To handle active discount when user is booking room.
+    const bookedCheckIn = <?= json_encode($bookedCheckIn); ?>;
+    const bookedCheckOut = <?= json_encode($bookedCheckOut); ?>;
 </script>
 <script src="assets/javascript/room.js"></script>
 

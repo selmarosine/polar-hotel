@@ -41,9 +41,9 @@ const discountCheck = (price) => {
   setNewPrice(price - discount);
 };
 
-const toggleDate = (date, prevSelected) => {
-  if (prevSelected) {
-    prevSelected.classList.remove("date-selected");
+const toggleDate = (date, prevDate) => {
+  if (prevDate) {
+    prevDate.classList.remove("date-selected");
   }
   date.classList.add("date-selected");
 };
@@ -62,47 +62,94 @@ const priceChange = () => {
   }
 };
 
-checkOutBtns.forEach((checkOutBtn, index) => {
-  const radioBtn = checkOutBtn.querySelector(".radio");
+checkOutBtns.forEach((checkOut, index) => {
+  const radioBtn = checkOut.querySelector(".radio");
+
   radioBtn.addEventListener("click", () => {
-    if (checkOutBtn.classList.contains("offset-month")) return;
-    const prevSelected = [...checkOutBtns].find((check) =>
-      check.classList.contains("date-selected")
-    );
-    toggleDate(checkOutBtn, prevSelected);
+    if (checkOut.classList.contains("offset-month")) return;
     checkOutIndex = index + 1;
 
+    const prevDate = [...checkOutBtns].find((check) =>
+      check.classList.contains("date-selected")
+    );
+
+    toggleDate(checkOut, prevDate);
     priceChange();
 
-    checkInBtns.forEach((checkIn, checkIdx) => {
-      if (checkIdx >= index) {
-        checkIn.classList.replace("current-month", "offset-month");
-      } else {
-        checkIn.classList.replace("offset-month", "current-month");
+    let afterSelectedDate = [...checkInBtns].reverse();
+    let originalIndex = -1;
+    let bookedDateIndex = afterSelectedDate.findIndex((date, findIndex) => {
+      // Find a gap > 1 day to find out if there is booked days
+      const dateA = parseInt(date.textContent);
+      const nextIndex =
+        findIndex + 1 <= afterSelectedDate.length - 1
+          ? findIndex + 1
+          : findIndex;
+      const dateB = parseInt(afterSelectedDate[nextIndex].textContent);
+      const unReversedIndex = afterSelectedDate.length - 1 - findIndex;
+
+      if (dateA - dateB > 1 && index > unReversedIndex) {
+        console.log({ index, unReversedIndex });
+        originalIndex = unReversedIndex;
+        return true;
       }
+
+      return false;
+    });
+
+    bookedDateIndex = originalIndex;
+
+    // Disable check in dates after selected check out date
+    checkInBtns.forEach((checkIn, checkIdx) => {
+      if (index <= checkIdx || checkIdx < bookedDateIndex) {
+        checkIn.classList.replace("current-month", "offset-month");
+        return;
+      }
+      checkIn.classList.replace("offset-month", "current-month");
     });
   });
 });
 
-checkInBtns.forEach((checkInBtn, index) => {
-  const radioBtn = checkInBtn.querySelector(".radio");
+checkInBtns.forEach((checkIn, index) => {
+  const radioBtn = checkIn.querySelector(".radio");
+
   radioBtn.addEventListener("click", () => {
-    if (checkInBtn.classList.contains("offset-month")) return;
-    const prevSelected = [...checkInBtns].find((check) =>
+    if (checkIn.classList.contains("offset-month")) return;
+    checkInIndex = index;
+
+    const prevDate = [...checkInBtns].find((check) =>
       check.classList.contains("date-selected")
     );
 
-    toggleDate(checkInBtn, prevSelected);
-    checkInIndex = index;
-
+    toggleDate(checkIn, prevDate);
     priceChange();
 
-    checkOutBtns.forEach((checkOut, checkIdx) => {
-      if (checkIdx <= index) {
-        checkOut.classList.replace("current-month", "offset-month");
-      } else {
-        checkOut.classList.replace("offset-month", "current-month");
+    let afterSelectedDate = [...checkOutBtns];
+    let bookedDateIndex = afterSelectedDate.findIndex((date, findIndex) => {
+      // Find a gap > 1 day to find out if there is booked days
+      const dateA = parseInt(date.textContent);
+      const nextIndex =
+        findIndex + 1 <= afterSelectedDate.length - 1
+          ? findIndex + 1
+          : findIndex;
+      const dateB = parseInt(afterSelectedDate[nextIndex].textContent);
+
+      if (dateB - dateA > 1 && index < findIndex) {
+        return true;
       }
+    });
+
+    if (bookedDateIndex < 0) {
+      bookedDateIndex = 999;
+    }
+
+    // Disable check out dates before selected check in date
+    checkOutBtns.forEach((checkOut, checkIdx) => {
+      if (checkIdx <= index || checkIdx > bookedDateIndex) {
+        checkOut.classList.replace("current-month", "offset-month");
+        return;
+      }
+      checkOut.classList.replace("offset-month", "current-month");
     });
   });
 });
