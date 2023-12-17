@@ -87,7 +87,7 @@ unset($_SESSION["bookingSuccess"]);
             <label for="transfer-code">
                 <h3>Enter your transfer code</h3>
             </label>
-            <input placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+            <input autocomplete="on" placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
         </div>
         <div class="space-between">
             <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
@@ -104,8 +104,6 @@ unset($_SESSION["bookingSuccess"]);
 </main>
 <script>
     const offers = <?= json_encode($roomOffers); ?>; // To handle active discount when user is booking room.
-    const bookedCheckIn = <?= json_encode($bookedCheckIn); ?>;
-    const bookedCheckOut = <?= json_encode($bookedCheckOut); ?>;
 </script>
 <script src="assets/javascript/room.js"></script>
 

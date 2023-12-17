@@ -89,7 +89,6 @@ checkOutBtns.forEach((checkOut, index) => {
       const unReversedIndex = afterSelectedDate.length - 1 - findIndex;
 
       if (dateA - dateB > 1 && index > unReversedIndex) {
-        console.log({ index, unReversedIndex });
         originalIndex = unReversedIndex;
         return true;
       }
@@ -169,6 +168,10 @@ activityChecks.forEach((activityCheck) => {
 
     priceTracker = newPrice;
 
-    discountCheck(newPrice);
+    if (offers.length > 0) {
+      discountCheck(newPrice);
+    } else {
+      setNewPrice(newPrice);
+    }
   });
 });

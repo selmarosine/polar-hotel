@@ -114,3 +114,49 @@ function isDateBooked(int $date, array $bookedCheckIn, array $bookedCheckOut): b
     }
     return false;
 }
+
+function calcDateDiff(string $dateA, string $dateB): int
+{
+    $dateA = new DateTime($dateA);
+    $dateB = new DateTime($dateB);
+
+    $diff = $dateA->diff($dateB);
+
+    return $diff->days + 1;
+}
+
+function calcActivitiesSum(array $activities, array $activitiesIds): int
+{
+    $price = 0;
+
+    foreach ($activities as $activity) {
+        if (in_array($activity["id"], $activitiesIds)) {
+            $price += intval($activity["price"]);
+        }
+    }
+
+    return $price;
+}
+
+function calcTotalPrice(array $offers, int $days, int $price): int
+{
+    $discount = array_reduce($offers, function (int $carry, array $offer) use ($days, $price) {
+        if ($offer["requirement"] === "days") {
+            if ($days > $offer["requirement_amount"]) {
+                return $carry + $offer["discount"];
+            }
+        }
+
+        if ($offer["requirement"] === "price") {
+            if ($price > $offer["requirement_amount"]) {
+                return $carry + $offer["discount"];
+            }
+        }
+
+        return $carry;
+    }, 0);
+
+    $discount = floor(($discount / 100) * $price);
+
+    return $price - $discount;
+}

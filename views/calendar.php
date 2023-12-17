@@ -16,7 +16,7 @@ $identifier = $calendarIdentifier ?? ''; // If the calender is for check in or o
         <?= $dateIsBooked ? "date-is-booked" : ""; ?>" title="<?= $dateIsBooked ? $date["date"] . " is already booked" : "Please select a date"; ?>">
             <?= $date["dayDate"] ?>
             <?php if ($selectedMonth === $date["month"] && !$dateIsBooked) : ?>
-                <input required class="date-radio radio" type="radio" name="date<?= $identifier ?>" value="<?= $date["date"] ?>">
+                <input required class="date-radio radio" type="radio" name="<?= $identifier ?>" value="<?= $date["date"] ?>">
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
