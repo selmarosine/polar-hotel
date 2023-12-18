@@ -26,9 +26,6 @@ $roomOffers = array_filter($offers, function ($offer) use ($room) {
 
 $errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
 unset($_SESSION["bookingErrors"]);
-
-$successMessage = isset($_SESSION["bookingSuccess"]) ? $_SESSION["bookingSuccess"] : "";
-unset($_SESSION["bookingSuccess"]);
 ?>
 
 <main class="room-main max-w-section">
@@ -94,9 +91,6 @@ unset($_SESSION["bookingSuccess"]);
             <div id="discount-sum" class="discount-text"></div>
         </div>
         <?php require __DIR__ . "/views/errorMessages.php"; ?>
-        <?php if (strlen($successMessage) > 0) : ?>
-            <div class="success-message"><?= $successMessage; ?></div>
-        <?php endif; ?>
         <input type="hidden" name="room" value="<?= $roomId ?>">
         <input type="hidden" name="total-cost" id="total-cost" value="<?= $room["price"] ?>">
         <button type="submit" class="submit-btn-blue cart-btn">Book <?= $room["name"]; ?></i></button>
