@@ -100,8 +100,9 @@ function filterForId(array $arrays, string $arrayId): array
     $filteredArray = array_filter($arrays, function ($array) use ($arrayId) {
         return $array["id"] === $arrayId;
     });
+    $filteredArray = reset($filteredArray);
 
-    return reset($filteredArray);
+    return !$filteredArray ? [] : $filteredArray;
 }
 
 function isDateBooked(int $date, array $bookedCheckIn, array $bookedCheckOut): bool

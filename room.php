@@ -13,8 +13,13 @@ $roomId = $_GET["room"];
 
 $room = filterForId($rooms, $roomId);
 
-// getBookedRooms.php depends on having $room["id"], there fore requiring it after $room is set
+if (count($room) === 0) {
+    redirect("index.php");
+}
+
+// getBookedRooms.php & reviews depends on having $room["id"], there fore requiring it after $room is set
 require __DIR__ . "/app/getBookedRooms.php";
+require __DIR__ . "/app/getReviews.php";
 
 $bookedCheckIn = array_column($bookedRooms, "check_in");
 $bookedCheckOut = array_column($bookedRooms, "check_out");
@@ -26,6 +31,9 @@ $roomOffers = array_filter($offers, function ($offer) use ($room) {
 
 $errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
 unset($_SESSION["bookingErrors"]);
+
+$successMessage = $_SESSION["reviewSuccess"] ?? "";
+unset($_SESSION["reviewSuccess"]);
 ?>
 
 <main class="room-main max-w-section">
@@ -84,7 +92,7 @@ unset($_SESSION["bookingErrors"]);
             <label for="transfer-code">
                 <h3>Enter your transfer code</h3>
             </label>
-            <input autocomplete="on" placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
+            <input autocomplete="off" placeholder="Code ..." class="transfer-code-input" type="text" name="transfer-code" id="transfer-code" required>
         </div>
         <div class="space-between">
             <h3>Total price: <span id="total-price"><?= "$" . $room["price"] ?></span></h3>
@@ -95,6 +103,35 @@ unset($_SESSION["bookingErrors"]);
         <input type="hidden" name="total-cost" id="total-cost" value="<?= $room["price"] ?>">
         <button type="submit" class="submit-btn-blue cart-btn">Book <?= $room["name"]; ?></i></button>
     </form>
+    <div class="reviews-container">
+        <h3 class="review-title">Leave a review</h3>
+        <form class="column review-form" action="app/insertReview.php">
+            <div>
+                <label class="create-room-label" for="name">Full name</label>
+                <input required min="2" class="transfer-code-input" type="text" name="name" id="name">
+            </div>
+            <div>
+                <label class="create-room-label" for="review">Write a review</label>
+                <textarea required class="transfer-code-input" name="review" id="review" maxlength="1000" rows="6"></textarea>
+            </div>
+            <input type="hidden" name="room" value="<?= $roomId ?>">
+            <?php if (strlen($successMessage) > 0) : ?>
+                <div class="success-message"><?= $successMessage; ?></div>
+            <?php endif; ?>
+            <button class="submit-btn-blue cart-btn" type="submit">Submit review</button>
+        </form>
+        <div class="column reviews">
+            <?php foreach ($reviews as $review) : ?>
+                <div class="review">
+                    <div>
+                        <span class="review-name"><?= $review["name"]; ?></span>
+                        <span class="review-date"><?= $review["created_date"]; ?></span>
+                    </div>
+                    <p><?= nl2br($review["review"]) ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </main>
 <script>
     const offers = <?= json_encode($roomOffers); ?>; // To handle active discount when user is booking room.

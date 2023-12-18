@@ -4,6 +4,7 @@ require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
 
 require __DIR__ . "/app/getRooms.php";
+require __DIR__ . "/app/getReviews.php"; // get count of reviews
 
 ?>
 <main>
@@ -37,6 +38,9 @@ require __DIR__ . "/app/getRooms.php";
                                 <h3><?= "$" . $room["price"]; ?></h3>
                             </div>
                             <span><?= $room["description"]; ?></span>
+                            <?php if (key_exists($room["id"], $reviewsCount)) : ?>
+                                <div><?= $reviewsCount[$room["id"]] . " reviews" ?></div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </a>
