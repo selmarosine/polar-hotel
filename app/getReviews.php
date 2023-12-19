@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . "/autoload.php";
 
 if (isset($roomId)) {
-    $getReviews = $db->prepare("SELECT name, review, created_date FROM room_reviews WHERE room_id = :room_id");
+    $getReviews = $db->prepare("SELECT name, review, created_date FROM room_reviews WHERE room_id = :room_id ORDER BY created_date DESC");
     $getReviews->bindParam(":room_id", $roomId, PDO::PARAM_STR); // $roomId should be set before requiring this file.
     $getReviews->execute();
 

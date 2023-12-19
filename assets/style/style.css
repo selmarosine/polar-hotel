@@ -114,6 +114,12 @@ textarea {
   border-radius: var(--rounded-sm);
 }
 
+.no-rooms-container {
+  padding: 64px 0;
+  opacity: 0.5;
+  text-align: center;
+}
+
 /* ---- Header ---- */
 header {
   display: flex;

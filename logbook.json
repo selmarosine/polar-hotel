@@ -24,6 +24,24 @@
           "video": "https://www.youtube.com/watch?v=5Ym-k30X5PY"
         }
       ]
+    },
+    {
+      "island": "Svalbard",
+      "hotel": "Polar Hotel",
+      "arrival_date": "2024-01-10",
+      "departure_date": "2024-01-13",
+      "total_cost": 62,
+      "stars": 4,
+      "features": [
+        {
+          "name": "Snowmobile",
+          "cost": 3
+        },
+        {
+          "name": "Polar bears :)",
+          "cost": 1
+        }
+      ]
     }
   ]
 }
