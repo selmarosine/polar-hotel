@@ -3,14 +3,12 @@ $errorMessages = isset($_SESSION["adminFormErrors"]) ? $_SESSION["adminFormError
 unset($_SESSION["adminFormErrors"]);
 ?>
 <form class="admin-form" action="<?= isset($activity) ? "/app/updateActivity.php" : "/app/insertActivity.php"; ?>" method="post" enctype="multipart/form-data">
-    <?php if (!isset($activity)) : ?>
-        <div class="column create-room-input">
-            <label for="image-main" class="file-input-container center file-span-2">
-                <i class="fa-solid fa-image"></i>
-                <input class="file-input" required type="file" name="image" id="image-main" accept="image/png, image/jpg, image/jpeg">
-            </label>
-        </div>
-    <?php endif; ?>
+    <div class="column create-room-input">
+        <label style="background-image: <?= isset($activity) ? "url(./../../assets/images/" . $activity["image"] . ")" : "" ?>" for="image-main" class="file-input-container center file-span-2">
+            <i class="fa-solid fa-image"></i>
+            <input class="file-input" <?= !isset($activity) ? "required" : ""; ?> type="file" name="image" id="image-main" accept="image/png, image/jpg, image/jpeg">
+        </label>
+    </div>
     <div class="flex-md name-price-container">
         <div class="column create-room-input">
             <label class="create-room-label" for="name">Activity</label>

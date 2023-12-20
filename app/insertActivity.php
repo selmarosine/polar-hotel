@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 require_once __DIR__ . "/autoload.php";
 
+if (isset($_FILES["image"]) && calcImagesSize([$_FILES["image"]["size"]])) {
+    $_SESSION["adminFormErrors"][] = "Image is to large max 20MB allowed";
+    redirect("/admin.php?form=activityForm");
+}
+
 if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_FILES["image"])) {
     $image = $_FILES["image"];
     $imageName = guidv4() . "-" . $image["name"];
