@@ -161,3 +161,28 @@ function calcTotalPrice(array $offers, int $days, int $price): int
 
     return $price - $discount;
 }
+
+function calcImagesSize(array $sizes): bool
+{
+    $sizes = array_reduce($sizes, function ($carry, $size) {
+        return $carry + $size;
+    }, 0);
+
+    $maxSize = 20 * 1024 * 1024; // 20MB
+
+    return $sizes > $maxSize;
+}
+
+function formatImageName(string $fileName): string
+{
+    // Replace " " with "-"
+    $fileName = explode(" ", $fileName);
+
+    $fileName = array_map(function ($name) {
+        return ($name === " ") ? "-" : $name;
+    }, $fileName);
+
+    $fileName = implode("-", $fileName);
+
+    return $fileName;
+}

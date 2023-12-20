@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 require_once __DIR__ . "/autoload.php";
 
+if (isset($_FILES["images"]) && calcImagesSize($_FILES["images"]["size"])) {
+    $_SESSION["adminFormErrors"][] = "Images are to large max 20MB allowed combined";
+    redirect("/admin.php?form=roomForm");
+}
+
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
     $images = $_FILES["images"];
     $imagesLength = count($images["name"]) <= 3 ? count($images["name"]) : 3;
@@ -21,7 +26,8 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
     $insertRoom->execute();
 
     for ($idx = 0; $idx < $imagesLength; $idx++) {
-        $imageName = guidv4() . "-" . $images["name"][$idx];
+        $fileName = formatImageName($images["name"][$idx]);
+        $imageName = guidv4() . "-" . $fileName;
 
         $insertImage = $db->prepare("INSERT INTO image_room (room_id, image) VALUES (:room_id, :image)");
         $insertImage->bindParam(":room_id", $roomId, PDO::PARAM_STR);
@@ -33,5 +39,5 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
     redirect("/admin.php?form=roomForm");
 }
 
-$_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again.";
+$_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again";
 redirect("/admin.php?form=roomForm");

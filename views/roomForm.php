@@ -4,9 +4,19 @@ unset($_SESSION["adminFormErrors"]);
 ?>
 <form class="admin-form" method="post" action="<?= isset($room) ? "/app/updateRoom.php" : "/app/insertRoom.php"; ?>" enctype="multipart/form-data">
     <?php if (!isset($room)) : ?>
-        <div class="column create-room-input">
-            <label class="create-room-label" for="images">Upload max 3 images</label>
-            <input style="color: #fff;" required type="file" name="images[]" id="images" multiple="multiple" accept="image/png, image/jpg, image/jpeg">
+        <div class="create-room-input room-gallery-grid">
+            <label for="image-main" class="file-input-container center file-span-2">
+                <i class="fa-solid fa-image"></i>
+                <input class="file-input" required type="file" name="images[]" id="image-main" accept="image/png, image/jpg, image/jpeg">
+            </label>
+            <label for="images-secondary-left" class="file-input-container center">
+                <i class="fa-solid fa-image"></i>
+                <input class="file-input" required type="file" name="images[]" id="images-secondary-left" accept="image/png, image/jpg, image/jpeg">
+            </label>
+            <label for="images-secondary-right" class="file-input-container center">
+                <i class="fa-solid fa-image"></i>
+                <input class="file-input" required type="file" name="images[]" id="images-secondary-right" accept="image/png, image/jpg, image/jpeg">
+            </label>
         </div>
     <?php endif; ?>
     <div class="flex-md name-price-container">

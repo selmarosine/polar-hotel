@@ -44,7 +44,7 @@ unset($_SESSION["reviewSuccess"]);
                     <h1><?= $room["name"]; ?></h1>
                     <h3><?= "$" . $room["price"]; ?></h3>
                 </div>
-                <div><?= $room["description"]; ?></div>
+                <div><?= nl2br($room["description"]); ?></div>
             </div>
             <?php if (count($roomOffers) > 0) : ?>
                 <div class="room-discount-container">

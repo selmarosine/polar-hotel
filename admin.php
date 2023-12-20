@@ -8,14 +8,15 @@ if (!isset($_SESSION["admin"])) {
     redirect("/login.php");
 }
 
+// redirect from admin page if admin session time has expired
 if ($_SESSION["admin"] < time()) {
     unset($_SESSION["admin"]);
     redirect("/login.php");
 }
 
-$_SESSION["admin"] = time() + 3600; // Update logged in session time
+// Update logged in session time
+$_SESSION["admin"] = time() + 3600;
 
-// Get data from db
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getActivities.php";
 require __DIR__ . "/app/getOffers.php";
@@ -44,6 +45,7 @@ if (isset($_GET["edit"])) {
         $activityId = $_GET["activity"];
         $activity = filterForId($activities, $activityId);
     }
+
     if (isset($_GET["offer"])) {
         $offerId = $_GET["offer"];
         $offer = filterForId($offers, $offerId);
@@ -103,7 +105,7 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
                                 <h3><?= $room["name"]; ?></h3>
                                 <h3><?= "$" . $room["price"]; ?></h3>
                             </div>
-                            <span><?= $room["description"]; ?></span>
+                            <span><?= nl2br($room["description"]); ?></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -128,7 +130,7 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
                                 <h3><?= $activity["name"]; ?></h3>
                                 <h3><?= "$" . $activity["price"]; ?></h3>
                             </div>
-                            <span><?= $activity["description"]; ?></span>
+                            <span><?= nl2br($activity["description"]); ?></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -172,4 +174,5 @@ $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
         </div>
     </section>
 </main>
+<script src="assets/javascript/admin.js"></script>
 <?php require_once __DIR__ . "/views/footer.php"; ?>

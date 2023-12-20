@@ -54,7 +54,7 @@ if (isset($_GET["check-in"], $_GET["check-out"])) {
                                 <h3><?= $room["name"]; ?></h3>
                                 <h3><?= "$" . $room["price"]; ?></h3>
                             </div>
-                            <span><?= $room["description"]; ?></span>
+                            <span><?= nl2br($room["description"]); ?></span>
                             <?php if (key_exists($room["id"], $reviewsCount)) : ?>
                                 <div><?= $reviewsCount[$room["id"]] . " reviews" ?></div>
                             <?php endif; ?>
