@@ -12,6 +12,8 @@ const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
 let priceTracker = baseRoomPrice; // Keep track of price with out discount
 let activityTotal = 0;
 
+console.log(offers);
+
 const setNewPrice = (price) => {
   totalCost.value = price; // update the hidden input for php
   totalPrice.textContent = `$${price}`;

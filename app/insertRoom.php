@@ -11,7 +11,6 @@ if (isset($_FILES["images"]) && calcImagesSize($_FILES["images"]["size"])) {
 
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
     $images = $_FILES["images"];
-    $imagesLength = count($images["name"]) <= 3 ? count($images["name"]) : 3;
 
     $name = htmlspecialchars(trim(ucfirst($_POST["name"])));
     $price = intval($_POST["price"]);
@@ -25,13 +24,14 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
     $insertRoom->bindParam(":description", $description, PDO::PARAM_STR);
     $insertRoom->execute();
 
-    for ($idx = 0; $idx < $imagesLength; $idx++) {
+    for ($idx = 0; $idx < 3; $idx++) {
         $fileName = formatImageName($images["name"][$idx]);
         $imageName = guidv4() . "-" . $fileName;
 
-        $insertImage = $db->prepare("INSERT INTO image_room (room_id, image) VALUES (:room_id, :image)");
+        $insertImage = $db->prepare("INSERT INTO image_room (room_id, image, position) VALUES (:room_id, :image, :position)");
         $insertImage->bindParam(":room_id", $roomId, PDO::PARAM_STR);
         $insertImage->bindParam(":image", $imageName, PDO::PARAM_STR);
+        $insertImage->bindParam(":position", $idx, PDO::PARAM_INT); // Position need to update the correct image later on
         $insertImage->execute();
 
         move_uploaded_file($images['tmp_name'][$idx], __DIR__ . "/../assets/images/" . $imageName);

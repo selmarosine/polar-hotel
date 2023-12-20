@@ -13,9 +13,11 @@ const displayImage = (imageElement, file) => {
   reader.readAsDataURL(file);
 };
 
-imageMain.addEventListener("input", (ev) => {
-  displayImage(ev.target.parentElement, ev.target.files[0]);
-});
+if (imageMain !== null) {
+  imageMain.addEventListener("input", (ev) => {
+    displayImage(ev.target.parentElement, ev.target.files[0]);
+  });
+}
 
 if (imageSecondaryLeft !== null) {
   imageSecondaryLeft.addEventListener("input", (ev) => {
