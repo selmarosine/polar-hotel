@@ -18,4 +18,4 @@ if (isset($_GET["id"], $_GET["image"])) {
     $deleteRoom->execute();
 }
 
-redirect("/admin.php");
+redirect("./../admin.php");

@@ -14,11 +14,11 @@ if (isset($_POST["password"])) {
 
     if (!isValidUuid($password) || $password !== $_ENV["API_KEY"]) {
         $_SESSION["loginError"][] = "Password incorrect, is this really an admin ?";
-        redirect("/login.php");
+        redirect("./../login.php");
     }
 
     $_SESSION["admin"] = time() + 3600;
-    redirect("../admin.php");
+    redirect("./../admin.php");
 }
 
-redirect("/login.php");
+redirect("./../login.php");

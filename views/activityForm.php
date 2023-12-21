@@ -2,9 +2,9 @@
 $errorMessages = isset($_SESSION["adminFormErrors"]) ? $_SESSION["adminFormErrors"] : [];
 unset($_SESSION["adminFormErrors"]);
 ?>
-<form class="admin-form" action="<?= isset($activity) ? "/app/updateActivity.php" : "/app/insertActivity.php"; ?>" method="post" enctype="multipart/form-data">
+<form class="admin-form" action="<?= isset($activity) ? "./app/updateActivity.php" : "./app/insertActivity.php"; ?>" method="post" enctype="multipart/form-data">
     <div class="column create-room-input">
-        <label style="background-image: <?= isset($activity) ? "url(./../../assets/images/" . $activity["image"] . ")" : "" ?>" for="image-main" class="file-input-container center file-span-2">
+        <label style="background-image: <?= isset($activity) ? "url(./assets/images/" . $activity["image"] . ")" : "" ?>" for="image-main" class="file-input-container center file-span-2">
             <i class="fa-solid fa-image"></i>
             <input class="file-input" <?= !isset($activity) ? "required" : ""; ?> type="file" name="image" id="image-main" accept="image/png, image/jpg, image/jpeg">
         </label>

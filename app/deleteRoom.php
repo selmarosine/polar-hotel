@@ -22,8 +22,8 @@ if (isset($_GET["id"], $_GET["images"])) {
             }
         }
     } catch (PDOException $e) {
-        redirect("/admin.php");
+        redirect("./../admin.php");
     }
 }
 
-redirect("/admin.php");
+redirect("./../admin.php");

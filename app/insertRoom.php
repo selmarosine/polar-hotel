@@ -6,7 +6,7 @@ require_once __DIR__ . "/autoload.php";
 
 if (isset($_FILES["images"]) && calcImagesSize($_FILES["images"]["size"])) {
     $_SESSION["adminFormErrors"][] = "Images are to large max 20MB allowed combined";
-    redirect("/admin.php?form=roomForm");
+    redirect("./../admin.php?form=roomForm");
 }
 
 if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["description"])) {
@@ -36,8 +36,8 @@ if (isset($_FILES["images"], $_POST["name"], $_POST["price"], $_POST["descriptio
 
         move_uploaded_file($images['tmp_name'][$idx], __DIR__ . "/../assets/images/" . $imageName);
     }
-    redirect("/admin.php?form=roomForm");
+    redirect("./../admin.php?form=roomForm");
 }
 
 $_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again";
-redirect("/admin.php?form=roomForm");
+redirect("./../admin.php?form=roomForm");

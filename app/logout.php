@@ -6,4 +6,4 @@ require_once __DIR__ . "/autoload.php";
 
 unset($_SESSION["admin"]);
 
-redirect(("../index.php"));
+redirect(("./../index.php"));

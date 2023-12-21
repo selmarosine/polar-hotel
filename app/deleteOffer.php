@@ -13,4 +13,4 @@ if (isset($_GET["id"])) {
     $deleteOffer->execute();
 }
 
-redirect("/admin.php");
+redirect("./../admin.php");

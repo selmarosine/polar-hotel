@@ -6,7 +6,7 @@ require_once __DIR__ . "/autoload.php";
 
 if (isset($_FILES["image"]) && calcImagesSize([$_FILES["image"]["size"]])) {
     $_SESSION["adminFormErrors"][] = "Image is to large max 20MB allowed";
-    redirect("/admin.php?form=activityForm");
+    redirect("./../admin.php?form=activityForm");
 }
 
 if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_POST["id"])) {
@@ -45,8 +45,8 @@ if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_POST["id"]))
 
     $updateRoom->execute();
 
-    redirect("/admin.php?form=activityForm");
+    redirect("./../admin.php?form=activityForm");
 }
 
 $_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again.";
-redirect("/admin.php?form=activityForm");
+redirect("./../admin.php?form=activityForm");

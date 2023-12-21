@@ -28,8 +28,8 @@ if (isset($_GET["name"], $_GET["discount"], $_GET["requirement"], $_GET["amount"
     $insertOfferRooms->execute(array_merge(...$offerRooms));
 
     $_SESSION["adminFormSuccess"] = "Discount created successfully";
-    redirect("/admin.php?form=offerForm");
+    redirect("./../admin.php?form=offerForm");
 }
 
 $_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again.";
-redirect("/admin.php?form=offerForm");
+redirect("./../admin.php?form=offerForm");

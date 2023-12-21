@@ -5,7 +5,7 @@ unset($_SESSION["adminFormErrors"]);
 $successMessage = isset($_SESSION["adminFormSuccess"]) ? $_SESSION["adminFormSuccess"] : "";
 unset($_SESSION["adminFormSuccess"]);
 ?>
-<form class="admin-form" action="<?= isset($offer) ? "app/updateOffer.php" : "app/insertOffer.php"; ?>">
+<form class="admin-form" action="<?= isset($offer) ? "./app/updateOffer.php" : "./app/insertOffer.php"; ?>">
     <div class="flex-md name-price-container">
         <div class="column create-room-input">
             <label class="create-room-label" for="name">Discount name</label>

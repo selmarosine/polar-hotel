@@ -19,4 +19,4 @@ if (isset($_GET["name"], $_GET["review"])) {
     $_SESSION["reviewSuccess"] = "$name, thanks for leaving a review";
 }
 
-redirect("/../room.php?room=$roomId");
+redirect("./../room.php?room=$roomId");

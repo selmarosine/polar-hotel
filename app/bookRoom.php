@@ -36,13 +36,13 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
 
     if ($totalCost !== calcTotalPrice($roomOffers, calcDateDiff($checkIn, $checkOut), $roomPrice + $activitiesTotal)) {
         $_SESSION["bookingErrors"][] = "Price has bin altered!";
-        redirect("/room.php?room=$roomId");
+        redirect("./../room.php?room=$roomId");
     }
 
     // Check if the format of the code is valid
     if (!isValidUuid($transferCode)) {
         $_SESSION["bookingErrors"][] = "$transferCode is not a transfer code";
-        redirect("/room.php?room=$roomId");
+        redirect("./../room.php?room=$roomId");
     }
 
     // // Check if code is valid in bank
@@ -59,11 +59,11 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
 
         if (isset($response["error"])) {
             $_SESSION["bookingErrors"][] = "The code you provided holds no value, check with your bank before booking a room again";
-            redirect("/room.php?room=$roomId");
+            redirect("./../room.php?room=$roomId");
         }
     } catch (ClientException $e) {
         $_SESSION["bookingErrors"][] = "Error while talking to your bank, please try again later";
-        redirect("/room.php?room=$roomId");
+        redirect("./../room.php?room=$roomId");
     }
 
     // Deposit money
@@ -105,11 +105,11 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
             "stars" => intval($_ENV["STARS"]),
             "features" => $activitiesReceipt
         ];
-        redirect("/receipt.php?room=$roomId");
+        redirect("./../receipt.php?room=$roomId");
     } catch (ClientException $e) {
         $_SESSION["bookingErrors"][] = "Error while booking your room, please try again later";
-        redirect("/room.php?room=$roomId");
+        redirect("./../room.php?room=$roomId");
     }
 }
 
-redirect("/room.php?room=$roomId");
+redirect("./../room.php?room=$roomId");

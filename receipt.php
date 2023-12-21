@@ -8,7 +8,7 @@ $successMessage = $_SESSION["bookingSuccess"] ?? "";
 unset($_SESSION["bookingSuccess"]);
 
 $receipt = $_SESSION["bookingReceipt"] ?? [];
-unset($_SESSION["bookingReceipt"]);
+// unset($_SESSION["bookingReceipt"]);
 
 $roomID = $_GET["room"] ?? "";
 
@@ -51,27 +51,13 @@ if (count($receipt) === 0) {
                 <span><?= "$" . $receipt["total_cost"]; ?></span>
             </div>
             <div class="line-break bg-dark"></div>
-            <button id="clipboard" class="submit-btn-blue">Copy receipt to clipboard</button>
+            <h3 class="receipt-title">JSON</h3>
+            <div>
+                <pre><?= json_encode($receipt, JSON_PRETTY_PRINT); ?></pre>
+            </div>
         </div>
         <a class="submit-btn-blue" href="room.php?room=<?= $roomID; ?>">Back to room</a>
         <a class="submit-btn-blue" href="index.php">Back to start</a>
     </div>
 </main>
-<script>
-    const receipt = JSON.stringify(<?= json_encode($receipt, JSON_PRETTY_PRINT); ?>, null, 2);
-    const clipboardBtn = document.querySelector("#clipboard");
-    const defaultText = clipboardBtn.textContent;
-
-    clipboardBtn.addEventListener("click", () => {
-        if (clipboardBtn.innerHTML !== defaultText) return;
-
-        clipboardBtn.innerHTML = "<i class=\"fa-solid fa-check\"></i>";
-        navigator.clipboard.writeText(receipt);
-
-        setTimeout(() => {
-            clipboardBtn.innerHTML = defaultText;
-        }, 700)
-    })
-</script>
-
 <?php require_once __DIR__ . "/views/footer.php"; ?>

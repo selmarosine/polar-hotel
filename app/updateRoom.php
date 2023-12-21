@@ -50,4 +50,4 @@ if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_POST["id"]))
     }
 }
 
-redirect("/admin.php?form=roomForm");
+redirect("./../admin.php?form=roomForm");

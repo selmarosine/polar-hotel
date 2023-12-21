@@ -42,6 +42,20 @@
           "cost": 1
         }
       ]
+    },
+    {
+      "island": "Svalbard",
+      "hotel": "Polar Hotel",
+      "arrival_date": "2024-01-05",
+      "departure_date": "2024-01-06",
+      "total_cost": 17,
+      "stars": 4,
+      "features": [
+        {
+          "name": "Polar bears :)",
+          "cost": 1
+        }
+      ]
     }
   ]
 }
