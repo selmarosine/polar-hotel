@@ -35,6 +35,7 @@ if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_POST["id"]))
                 unlink($oldImage);
             }
 
+            // Update image
             $fileName = formatImageName($images["name"][$idx]);
             $imageName = guidv4() . "-" . $fileName;
 

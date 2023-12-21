@@ -29,13 +29,15 @@ $roomOffers = array_filter($offers, function ($offer) use ($room) {
     return in_array($room["id"], $offer["rooms"]);
 });
 
+// Reset index
+$roomOffers = array_values($roomOffers);
+
 $errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
 unset($_SESSION["bookingErrors"]);
 
 $successMessage = $_SESSION["reviewSuccess"] ?? "";
 unset($_SESSION["reviewSuccess"]);
 ?>
-
 <main class="room-main max-w-section">
     <div class="room-content-order">
         <div class="column room-info-container space-between">

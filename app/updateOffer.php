@@ -24,21 +24,27 @@ if (isset($_GET["name"], $_GET["discount"], $_GET["requirement"], $_GET["amount"
     $currentRooms = $db->prepare("SELECT room_id FROM offer_room WHERE offer_id = :offer_id");
     $currentRooms->bindParam(":offer_id", $offerId, PDO::PARAM_STR);
     $currentRooms->execute();
-    $currentRooms = array_values($currentRooms->fetchAll(PDO::FETCH_ASSOC));
+    $currentRooms = array_values($currentRooms->fetchAll());
+
 
     // For when the admin selects a new room in update form
     $roomsToInsert = array_filter($rooms, function ($room) use ($currentRooms) {
         return !in_array($room, array_column($currentRooms, "room_id"));
     });
+    // Reset index
+    $roomsToInsert = array_values($roomsToInsert);
+
     // For when the admin deselects a room in update form
     $roomsToDelete = array_filter($currentRooms, function ($currentRoom) use ($rooms) {
         return !in_array($currentRoom["room_id"], $rooms);
     });
+    // Reset index
+    $roomsToDelete = array_values($roomsToDelete);
 
     if (!empty($roomsToInsert)) {
         // Insert the selected rooms that dose not already have the offer
-        $offerRooms = array_map(fn ($room) => [$offerId, $room], $rooms);
-        $placeHolder = rtrim(str_repeat("(?, ?), ", count($rooms)), ", ");
+        $offerRooms = array_map(fn ($room) => [$offerId, $room], $roomsToInsert);
+        $placeHolder = rtrim(str_repeat("(?, ?), ", count($offerRooms)), ", ");
         $insertOfferRooms = $db->prepare("INSERT INTO offer_room (offer_id, room_id) VALUES $placeHolder");
         $insertOfferRooms->execute(array_merge(...$offerRooms));
     }
