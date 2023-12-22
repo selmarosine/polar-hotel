@@ -226,7 +226,7 @@ aside nav {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("../images/svalbard_bear.jpg");
+  background: url("./../images/svalbard_bear.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -815,4 +815,29 @@ aside nav {
 
 .receipt-title {
   text-align: center;
+}
+
+/* ---- Page not found ---- */
+.page-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-not-found p {
+  text-align: center;
+}
+
+.not-found-title {
+  font-size: 6rem;
+  font-weight: 600;
+}
+
+.not-found-back-link {
+  padding: 8px 16px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }

@@ -1,0 +1,2 @@
+RewriteEngine On
+ErrorDocument 404 http://wdavidson.se/polar/404.php

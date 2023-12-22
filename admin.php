@@ -1,17 +1,15 @@
 <?php
 require_once __DIR__ . "/app/autoload.php";
-require_once __DIR__ . "/views/header.php";
-require_once __DIR__ . "/views/navigation.php";
 require_once __DIR__ . "/vendor/autoload.php";
 
 if (!isset($_SESSION["admin"])) {
-    redirect("/login.php");
+    redirect("./login.php");
 }
 
 // redirect from admin page if admin session time has expired
 if ($_SESSION["admin"] < time()) {
     unset($_SESSION["admin"]);
-    redirect("/login.php");
+    redirect("./login.php");
 }
 
 // Update logged in session time
@@ -62,6 +60,8 @@ $request = $client->post("accountInfo.php", [
 
 $bankAccount = json_decode($request->getBody()->getContents(), true)["credit"];
 
+require_once __DIR__ . "/views/header.php";
+require_once __DIR__ . "/views/navigation.php";
 ?>
 
 <main class="admin-main">

@@ -1,20 +1,20 @@
 <?php
 
 require_once __DIR__ . "/app/autoload.php";
-require_once __DIR__ . "/views/header.php";
-require_once __DIR__ . "/views/navigation.php";
 
 $successMessage = $_SESSION["bookingSuccess"] ?? "";
 unset($_SESSION["bookingSuccess"]);
 
 $receipt = $_SESSION["bookingReceipt"] ?? [];
-// unset($_SESSION["bookingReceipt"]);
 
 $roomID = $_GET["room"] ?? "";
 
 if (count($receipt) === 0) {
-    redirect("index.php");
+    redirect("404.php");
 }
+
+require_once __DIR__ . "/views/header.php";
+require_once __DIR__ . "/views/navigation.php";
 ?>
 <main class="room-main max-w-section">
     <?php if (strlen($successMessage) > 0) : ?>

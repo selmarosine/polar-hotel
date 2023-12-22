@@ -1,8 +1,6 @@
 <?php
 
 require_once __DIR__ . "/app/autoload.php";
-require_once __DIR__ . "/views/header.php";
-require_once __DIR__ . "/views/navigation.php";
 
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getActivities.php";
@@ -14,7 +12,7 @@ $roomId = $_GET["room"];
 $room = filterForId($rooms, $roomId);
 
 if (count($room) === 0) {
-    redirect("index.php");
+    redirect("404.php");
 }
 
 // getBookedRooms.php & reviews depends on having $room["id"], there fore requiring it after $room is set
@@ -37,6 +35,9 @@ unset($_SESSION["bookingErrors"]);
 
 $successMessage = $_SESSION["reviewSuccess"] ?? "";
 unset($_SESSION["reviewSuccess"]);
+
+require_once __DIR__ . "/views/header.php";
+require_once __DIR__ . "/views/navigation.php";
 ?>
 <main class="room-main max-w-section">
     <div class="room-content-order">
