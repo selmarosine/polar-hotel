@@ -318,6 +318,9 @@ aside nav {
   border-radius: var(--rounded-md);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .room-card-image {
@@ -328,6 +331,7 @@ aside nav {
   padding: 16px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 16px;
 }
 
@@ -408,6 +412,14 @@ aside nav {
   padding: 8px;
   border-radius: var(--rounded-sm);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.review-count {
+  margin-top: auto;
+}
+
+.error-dates-search {
+  margin-top: 24px;
 }
 
 /* ---- Login ---- */

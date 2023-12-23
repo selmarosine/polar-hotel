@@ -39,6 +39,25 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
         redirect("./../room.php?room=$roomId");
     }
 
+    // Check if dates are booked
+    try {
+        $getBookedDates = $db->prepare("SELECT * FROM booked_rooms WHERE room_id = :room_id AND check_in NOT BETWEEN :check_in AND :check_out AND check_out NOT BETWEEN :check_in AND :check_out");
+        $getBookedDates->bindParam(":room_id", $roomId, PDO::PARAM_STR);
+        $getBookedDates->bindParam(":check_in", $checkIn, PDO::PARAM_STR);
+        $getBookedDates->bindParam(":check_out", $checkOut, PDO::PARAM_STR);
+        $getBookedDates->execute();
+
+        $bookedDates = $getBookedDates->fetchAll();
+
+        if (count($bookedDates) > 0) {
+            $_SESSION["bookingErrors"][] = "Error, dates are already booked please pick another date";
+            redirect("./../room.php?room=$roomId");
+        }
+    } catch (PDOException $e) {
+        $_SESSION["bookingErrors"][] = "Error while checking dates, please try again later";
+        redirect("./../room.php?room=$roomId");
+    }
+
     // Check if the format of the code is valid
     if (!isValidUuid($transferCode)) {
         $_SESSION["bookingErrors"][] = "$transferCode is not a transfer code";

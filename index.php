@@ -1,14 +1,18 @@
 <?php
 
-use Dotenv\Parser\Value;
-
 require_once __DIR__ . "/app/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/views/header.php";
 require_once __DIR__ . "/views/navigation.php";
 
 require __DIR__ . "/app/getRooms.php";
 require __DIR__ . "/app/getReviews.php"; // get count of reviews
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+$stars = intval($_ENV["STARS"]);
+
+// Available dates form rooms search
 if (isset($_GET["check-in"], $_GET["check-out"])) {
     // Check if user has selected check out earlier then check in
     $searchCheckIn = $_GET["check-in"] < $_GET["check-out"] ? $_GET["check-in"] : $_GET["check-out"];
@@ -24,12 +28,20 @@ if (isset($_GET["check-in"], $_GET["check-out"])) {
     });
 }
 
+$errorMessages = isset($_SESSION["bookingErrors"]) ? $_SESSION["bookingErrors"] : [];
+unset($_SESSION["bookingErrors"]);
+
 ?>
 <main>
     <section class="hero">
         <div class="hero-text-container">
             <h3>Svalbard</h3>
             <p>The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nestled in Longyearbyen, it provides a unique experience with stunning views, making it an ideal retreat for those seeking an adventurous getaway in the Arctic.</p>
+            <div>
+                <?php for ($i = 0; $i < $stars; $i++) : ?>
+                    <i class="fa-solid fa-star"></i>
+                <?php endfor; ?>
+            </div>
         </div>
     </section>
     <section class="rooms-section">
@@ -43,6 +55,9 @@ if (isset($_GET["check-in"], $_GET["check-out"])) {
                 <?php endif; ?>
             </div>
         </form>
+        <div class="<?= count($errorMessages) > 0 ? "error-dates-search" : ""; ?>">
+            <?php require __DIR__ . "/views/errorMessages.php"; ?>
+        </div>
         <h3 class="rooms-container-title">Rooms</h3>
         <div class="rooms-container">
             <?php foreach ($rooms as $room) : ?>
@@ -56,7 +71,7 @@ if (isset($_GET["check-in"], $_GET["check-out"])) {
                             </div>
                             <span><?= nl2br($room["description"]); ?></span>
                             <?php if (key_exists($room["id"], $reviewsCount)) : ?>
-                                <div><?= $reviewsCount[$room["id"]] . " reviews" ?></div>
+                                <div class="review-count"><?= $reviewsCount[$room["id"]] . (intval($reviewsCount[$room["id"]]) > 1 ? " reviews" : " review") ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
