@@ -103,7 +103,11 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
             "departure_date" => $checkOut,
             "total_cost" => $totalCost,
             "stars" => intval($_ENV["STARS"]),
-            "features" => $activitiesReceipt
+            "features" => $activitiesReceipt,
+            "additional_info" => [
+                "greeting" => "Thanks for choosing " . $_ENV["HOTEL_NAME"] . ", we look forward to seeing you " . $checkIn,
+                "imageUrl" => "https://i.giphy.com/fSHgyXYXy8Sd2.webp"
+            ]
         ];
         redirect("./../receipt.php?room=$roomId");
     } catch (ClientException $e) {

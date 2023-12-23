@@ -29,7 +29,7 @@ if (isset($_GET["check-in"], $_GET["check-out"])) {
     <section class="hero">
         <div class="hero-text-container">
             <h3>Svalbard</h3>
-            <p>Discover Polar Hotel in Svalbard where nature, cuisine, and wildlife converge. Immerse yourself in arctic beauty, relish in exquisite dining inspired by the land, and witness the untamed wildlife. Your adventure begins here!</p>
+            <p>The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nestled in Longyearbyen, it provides a unique experience with stunning views, making it an ideal retreat for those seeking an adventurous getaway in the Arctic.</p>
         </div>
     </section>
     <section class="rooms-section">

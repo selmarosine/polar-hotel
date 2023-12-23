@@ -52,9 +52,10 @@ require_once __DIR__ . "/views/navigation.php";
             </div>
             <div class="line-break bg-dark"></div>
             <h3 class="receipt-title">JSON</h3>
-            <div>
-                <pre><?= json_encode($receipt, JSON_PRETTY_PRINT); ?></pre>
+            <div class="receipt-json">
+                <pre><?= json_encode($receipt, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES); ?></pre>
             </div>
+            <img class="receipt-additional-image" src="<?= $receipt["additional_info"]["imageUrl"]; ?>" alt="polar bear">
         </div>
         <a class="submit-btn-blue" href="room.php?room=<?= $roomID; ?>">Back to room</a>
         <a class="submit-btn-blue" href="index.php">Back to start</a>

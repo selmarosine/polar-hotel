@@ -791,7 +791,7 @@ aside nav {
 /* ---- Receipt ---- */
 .receipt-container {
   margin: 64px auto;
-  max-width: 400px;
+  max-width: 1000px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -815,6 +815,18 @@ aside nav {
 
 .receipt-title {
   text-align: center;
+}
+
+.receipt-json {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+}
+
+.receipt-additional-image {
+  border-radius: var(--rounded-md);
+  width: 100%;
+  margin-top: 24px;
 }
 
 /* ---- Page not found ---- */
