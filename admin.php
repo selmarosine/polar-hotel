@@ -29,7 +29,7 @@ $client = new Client([
     "base_uri" => "https://www.yrgopelag.se/centralbank/"
 ]);
 
-$form = isset($_GET["form"]) ? $_GET["form"] : "roomForm";
+$form = isset($_GET["form"]) && file_exists("./views/" . $_GET["form"] . ".php") ? $_GET["form"] : "roomForm";
 
 // For admin to edit selected product
 if (isset($_GET["edit"])) {

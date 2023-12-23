@@ -10,13 +10,17 @@ if (isset($_GET["name"], $_GET["review"])) {
     $name = htmlspecialchars(trim(ucwords($_GET["name"])));
     $review = htmlspecialchars(trim(ucfirst($_GET["review"])));
 
-    $insertReview = $db->prepare("INSERT INTO room_reviews (room_id, name, review) VALUES (:room_id, :name, :review)");
-    $insertReview->bindParam(":room_id", $roomId, PDO::PARAM_STR);
-    $insertReview->bindParam(":name", $name, PDO::PARAM_STR);
-    $insertReview->bindParam(":review", $review, PDO::PARAM_STR);
-    $insertReview->execute();
+    try {
+        $insertReview = $db->prepare("INSERT INTO room_reviews (room_id, name, review) VALUES (:room_id, :name, :review)");
+        $insertReview->bindParam(":room_id", $roomId, PDO::PARAM_STR);
+        $insertReview->bindParam(":name", $name, PDO::PARAM_STR);
+        $insertReview->bindParam(":review", $review, PDO::PARAM_STR);
+        $insertReview->execute();
 
-    $_SESSION["reviewSuccess"] = "$name, thanks for leaving a review";
+        $_SESSION["reviewSuccess"] = "$name, thanks for leaving a review";
+    } catch (PDOException $e) {
+        redirect("./../room.php?room=$roomId");
+    }
 }
 
 redirect("./../room.php?room=$roomId");

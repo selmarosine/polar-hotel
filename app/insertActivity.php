@@ -17,16 +17,21 @@ if (isset($_POST["name"], $_POST["price"], $_POST["description"], $_FILES["image
     $description = htmlspecialchars(trim($_POST["description"]));
     $activityId = guidv4();
 
-    $insertActivity = $db->prepare("INSERT INTO activities (id, name, price, description, image) VALUES (:id, :name, :price, :description, :image)");
-    $insertActivity->bindParam(":id", $activityId, PDO::PARAM_STR);
-    $insertActivity->bindParam(":name", $name, PDO::PARAM_STR);
-    $insertActivity->bindParam(":price", $price, PDO::PARAM_INT);
-    $insertActivity->bindParam(":description", $description, PDO::PARAM_STR);
-    $insertActivity->bindParam(":image", $imageName, PDO::PARAM_STR);
-    $insertActivity->execute();
+    try {
+        $insertActivity = $db->prepare("INSERT INTO activities (id, name, price, description, image) VALUES (:id, :name, :price, :description, :image)");
+        $insertActivity->bindParam(":id", $activityId, PDO::PARAM_STR);
+        $insertActivity->bindParam(":name", $name, PDO::PARAM_STR);
+        $insertActivity->bindParam(":price", $price, PDO::PARAM_INT);
+        $insertActivity->bindParam(":description", $description, PDO::PARAM_STR);
+        $insertActivity->bindParam(":image", $imageName, PDO::PARAM_STR);
+        $insertActivity->execute();
 
-    move_uploaded_file($image["tmp_name"], __DIR__ . "/../assets/images/" . $imageName);
-    redirect("./../admin.php?form=activityForm");
+        move_uploaded_file($image["tmp_name"], __DIR__ . "/../assets/images/" . $imageName);
+        redirect("./../admin.php?form=activityForm");
+    } catch (PDOException $e) {
+        $_SESSION["adminFormErrors"][] = "Error while saving new activity";
+        redirect("./../admin.php?form=activityForm");
+    }
 }
 
 $_SESSION["adminFormErrors"][] = "Not all fields are filled in, please try again.";
