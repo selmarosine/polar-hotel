@@ -67,13 +67,13 @@ require_once __DIR__ . "/views/navigation.php";
     <form method="post" class="book-room-form" action="app/bookRoom.php">
         <div class="check-in-out-calenders">
             <div>
-                <h3>Check in</h3>
+                <h3>Check in - Jan, 2024</h3>
                 <?php
                 $calendarIdentifier = "check_in";
                 require __DIR__ . "/views/calendar.php"; ?>
             </div>
             <div>
-                <h3>Check out</h3>
+                <h3>Check out - Jan, 2024</h3>
                 <?php
                 $calendarIdentifier = "check_out";
                 require __DIR__ . "/views/calendar.php"; ?>

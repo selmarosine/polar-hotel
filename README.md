@@ -18,7 +18,7 @@ The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nestled in 
 
 ### Localhost
 
-There is a [`router.php`]("/router.php") file that handles displaying a 404 page if url path dose not exists you need to start the php localhost like this.
+There is a `router.php` file that handles displaying a 404 page if url path dose not exists you need to start the php localhost like this.
 
 ```bash
 php -S localhost:8000 router.php
@@ -26,7 +26,7 @@ php -S localhost:8000 router.php
 
 ### .env
 
-Use the [`example.env`]("/example.env") to create your .env file and get your api key from [Yrgopelag](https://www.yrgopelag.se/centralbank/) and enter it in `API_KEY` enter the user name you created at Yrgopelag in `USER_NAME` as well.
+Use the `example.env` to create your .env file and get your api key from [Yrgopelag](https://www.yrgopelag.se/centralbank/) and enter it in `API_KEY` enter the user name you created at Yrgopelag in `USER_NAME` as well.
 
 ### Admin
 
@@ -36,13 +36,13 @@ When you have successfully logged in to the admin page you can alter the content
 
 ### Editor config
 
-If you want a more decent indentation of your .php files, you could edit [.editorconfig]('/.editorconfig').
+If you want a more decent indentation of your .php files, you could edit `editorconfig`
 
 ### Database
 
-The database stores rooms, activities, discount and booked dates in the [`polar-hotel.db`]("/app/database/polar-hotel.db") which is a sqlite database.
+The database stores rooms, activities, discount and booked dates in the `polar-hotel.db` which is a sqlite database.
 
-The created tables commands are included in the [`db-structure.md`]("/app/database/db-structure.md")
+The created tables commands are included in the `db-structure.md`
 
 # Code review
 

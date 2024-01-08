@@ -14,6 +14,9 @@ require __DIR__ . "/getOffers.php";
 $client = new Client([
     "base_uri" => "https://www.yrgopelag.se/centralbank/"
 ]);
+$giphyClient = new Client([
+    "base_uri" => 'https://api.giphy.com/v1/gifs/search',
+]);
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
@@ -23,7 +26,7 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
     $roomId = $_POST["room"];
     $checkIn = $_POST["check_in"];
     $checkOut = $_POST["check_out"];
-    $activitiesIds = $_POST["activities"] ?? "";
+    $activitiesIds = $_POST["activities"] ?? [];
     $totalCost = intval($_POST["total-cost"]);
 
     // Check if $totalCost is the correct price
@@ -101,6 +104,10 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
         $insertBooking->bindParam(":room_id", $roomId, PDO::PARAM_STR);
         $insertBooking->execute();
 
+        // Select the gif url from giphy
+        $getPolarGif = $giphyClient->get("", ["query" => ["q" => "polarbear", "api_key" => $_ENV["GIPHY_KEY"], 'limit' => 5, 'lang' => 'en']]);
+        $polarGif = json_decode($getPolarGif->getBody()->getContents(), true)['data'][0]["images"]["original"]["url"];
+
         $activitiesReceipt = array_map(function ($activity) use ($activitiesIds) {
             if (in_array($activity["id"], $activitiesIds)) {
                 return [
@@ -125,7 +132,7 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
             "features" => $activitiesReceipt,
             "additional_info" => [
                 "greeting" => "Thanks for choosing " . $_ENV["HOTEL_NAME"] . ", we look forward to seeing you " . $checkIn,
-                "imageUrl" => "https://i.giphy.com/fSHgyXYXy8Sd2.webp"
+                "imageUrl" => $polarGif
             ]
         ];
         redirect("./../receipt.php?room=$roomId");

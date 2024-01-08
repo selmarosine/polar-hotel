@@ -6,6 +6,10 @@
   .room-gallery-grid {
     margin: 0 auto;
   }
+
+  .admin-form .room-gallery-grid {
+    margin: 0;
+  }
 }
 
 @media (min-width: 900px) {

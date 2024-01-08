@@ -6,7 +6,7 @@ $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $file = __DIR__ . $path;
 
 // if file exists then continue as usual else 404.php
-if (is_file($file)) {
+if (is_file($file) || $path === "/") {
     return false;
 } else {
     include("404.php");
