@@ -28,6 +28,8 @@ php -S localhost:8000 router.php
 
 Use the `example.env` to create your .env file and get your api key from [Yrgopelag](https://www.yrgopelag.se/centralbank/) and enter it in `API_KEY` enter the user name you created at Yrgopelag in `USER_NAME` as well.
 
+When creating a receipt for a booked room the code get a gif from [`Giphy api`](https://developers.giphy.com/), create a new app to get your api key and insert it in to the .env file with the name `GIPHY_KEY`
+
 ### Admin
 
 There is a admin page, to access it you need to login in with your `API_KEY` from .env.

@@ -27,7 +27,6 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
     $checkIn = $_POST["check_in"];
     $checkOut = $_POST["check_out"];
     $activitiesIds = $_POST["activities"] ?? [];
-    $totalCost = intval($_POST["total-cost"]);
 
     // Check if $totalCost is the correct price
     $room = filterForId($rooms, $roomId);
@@ -36,15 +35,11 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
     $roomOffers = array_filter($offers, function ($offer) use ($roomId) {
         return in_array($roomId, $offer["rooms"]);
     });
-
-    if ($totalCost !== calcTotalPrice($roomOffers, calcDateDiff($checkIn, $checkOut), $roomPrice + $activitiesTotal)) {
-        $_SESSION["bookingErrors"][] = "Price has bin altered!";
-        redirect("./../room.php?room=$roomId");
-    }
+    $totalCost = calcTotalPrice($roomOffers, calcDateDiff($checkIn, $checkOut), $roomPrice + $activitiesTotal);
 
     // Check if dates are booked
     try {
-        $getBookedDates = $db->prepare("SELECT * FROM booked_rooms WHERE room_id = :room_id AND check_in NOT BETWEEN :check_in AND :check_out AND check_out NOT BETWEEN :check_in AND :check_out");
+        $getBookedDates = $db->prepare("SELECT * FROM booked_rooms WHERE room_id = :room_id AND check_in BETWEEN :check_in AND :check_out AND check_out BETWEEN :check_in AND :check_out");
         $getBookedDates->bindParam(":room_id", $roomId, PDO::PARAM_STR);
         $getBookedDates->bindParam(":check_in", $checkIn, PDO::PARAM_STR);
         $getBookedDates->bindParam(":check_out", $checkOut, PDO::PARAM_STR);
