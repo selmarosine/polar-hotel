@@ -14,7 +14,8 @@ if (isset($_GET["name"], $_GET["discount"], $_GET["requirement"], $_GET["amount"
 
     try {
         // update offer
-        $insertOffer = $db->prepare("UPDATE offers SET name = :name, discount = :discount, requirement = :requirement, requirement_amount = :requirement_amount");
+        $insertOffer = $db->prepare("UPDATE offers SET name = :name, discount = :discount, requirement = :requirement, requirement_amount = :requirement_amount WHERE id = :id");
+        $insertOffer->bindParam(":id", $offerId, PDO::PARAM_STR);
         $insertOffer->bindParam(":name", $name, PDO::PARAM_STR);
         $insertOffer->bindParam(":discount", $discount, PDO::PARAM_INT);
         $insertOffer->bindParam(":requirement", $requirement, PDO::PARAM_STR);
