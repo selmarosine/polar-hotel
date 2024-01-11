@@ -5,7 +5,6 @@ let checkOutIndex = null;
 
 const activityChecks = document.querySelectorAll(".activity-check");
 const totalPrice = document.querySelector("#total-price");
-const totalCost = document.querySelector("#total-cost");
 const discountSum = document.querySelector("#discount-sum");
 
 const baseRoomPrice = parseInt(totalPrice.textContent.split("$")[1]);
@@ -13,7 +12,6 @@ let priceTracker = baseRoomPrice; // Keep track of price with out discount
 let activityTotal = 0;
 
 const setNewPrice = (price) => {
-  totalCost.value = price; // update the hidden input for php
   totalPrice.textContent = `$${price}`;
 };
 
@@ -41,6 +39,7 @@ const discountCheck = (price) => {
   setNewPrice(price - discount);
 };
 
+// Remove class from previously selected date and add it to to new date
 const toggleDate = (date, prevDate) => {
   if (prevDate) {
     prevDate.classList.remove("date-selected");
@@ -49,16 +48,16 @@ const toggleDate = (date, prevDate) => {
 };
 
 const priceChange = () => {
+  // Check in and out must be selected
   if (checkOutIndex === null || checkInIndex === null) return;
 
   const daysBooked = checkOutIndex - checkInIndex;
-  const newPrice = baseRoomPrice * daysBooked + activityTotal;
-  priceTracker = newPrice;
+  priceTracker = baseRoomPrice * daysBooked + activityTotal;
 
   if (offers.length > 0) {
-    discountCheck(newPrice);
+    discountCheck(priceTracker);
   } else {
-    setNewPrice(newPrice);
+    setNewPrice(priceTracker);
   }
 };
 
@@ -66,9 +65,10 @@ checkOutBtns.forEach((checkOut, index) => {
   const radioBtn = checkOut.querySelector(".radio");
 
   radioBtn.addEventListener("click", () => {
-    if (checkOut.classList.contains("offset-month")) return;
+    if (checkOut.classList.contains("offset-month")) return; // prevent date not in current month to be clicked
     checkOutIndex = index + 1;
 
+    // Find previous selected date
     const prevDate = [...checkOutBtns].find((check) =>
       check.classList.contains("date-selected")
     );
@@ -76,10 +76,11 @@ checkOutBtns.forEach((checkOut, index) => {
     toggleDate(checkOut, prevDate);
     priceChange();
 
+    // If a user selects checkOut 31 and there is a booked date 24 this will find the booked date and disable all the dates before the booked date on the check in calender
+    // To prevent a user booking date over a booked date
     let afterSelectedDate = [...checkInBtns].reverse();
     let originalIndex = -1;
     let bookedDateIndex = afterSelectedDate.findIndex((date, findIndex) => {
-      // Find a gap > 1 day to find out if there is booked days
       const dateA = parseInt(date.textContent);
       const nextIndex =
         findIndex + 1 <= afterSelectedDate.length - 1
@@ -123,6 +124,8 @@ checkInBtns.forEach((checkIn, index) => {
     toggleDate(checkIn, prevDate);
     priceChange();
 
+    // If a user selects checkIn 5 and there is a booked date 11 this will find the booked date and disable all the dates after the booked date on the check out calender
+    // To prevent a user booking date over a booked date
     let afterSelectedDate = [...checkOutBtns];
     let bookedDateIndex = afterSelectedDate.findIndex((date, findIndex) => {
       // Find a gap > 1 day to find out if there is booked days
@@ -162,16 +165,14 @@ activityChecks.forEach((activityCheck) => {
       ? activityTotal + price
       : activityTotal - price;
 
-    const newPrice = activityCheck.checked
+    priceTracker = activityCheck.checked
       ? priceTracker + price
       : priceTracker - price;
 
-    priceTracker = newPrice;
-
     if (offers.length > 0) {
-      discountCheck(newPrice);
+      discountCheck(priceTracker);
     } else {
-      setNewPrice(newPrice);
+      setNewPrice(priceTracker);
     }
   });
 });

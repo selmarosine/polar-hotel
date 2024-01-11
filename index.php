@@ -35,7 +35,7 @@ unset($_SESSION["bookingErrors"]);
 <main>
     <section class="hero">
         <div class="hero-text-container">
-            <h3>Svalbard</h3>
+            <h3><?= $_ENV["ISLAND_NAME"] ?></h3>
             <p>The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nestled in Longyearbyen, it provides a unique experience with stunning views, making it an ideal retreat for those seeking an adventurous getaway in the Arctic.</p>
             <div>
                 <?php for ($i = 0; $i < $stars; $i++) : ?>
@@ -45,6 +45,7 @@ unset($_SESSION["bookingErrors"]);
         </div>
     </section>
     <section class="rooms-section">
+        <div class="rooms-filter-search-title">Already have a date in mined ?</div>
         <form class="rooms-filter-container">
             <div class="check-in-out-search">
                 <input value="<?= isset($searchCheckIn) ? $searchCheckIn : ""; ?>" required class="check-date-input" type="date" name="check-in" id="check-in" min="2024-01-01" max="2024-01-31">

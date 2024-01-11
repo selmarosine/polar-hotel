@@ -103,7 +103,6 @@ require_once __DIR__ . "/views/navigation.php";
         </div>
         <?php require __DIR__ . "/views/errorMessages.php"; ?>
         <input type="hidden" name="room" value="<?= $roomId ?>">
-        <input type="hidden" name="total-cost" id="total-cost" value="<?= $room["price"] ?>">
         <button type="submit" class="submit-btn-blue cart-btn">Book <?= $room["name"]; ?></i></button>
     </form>
     <div class="reviews-container">

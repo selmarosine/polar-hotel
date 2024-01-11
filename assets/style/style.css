@@ -800,6 +800,14 @@ aside nav {
   margin-bottom: 24px;
 }
 
+.rooms-filter-search-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
 /* ---- Receipt ---- */
 .receipt-container {
   margin: 64px auto;

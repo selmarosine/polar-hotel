@@ -14,6 +14,7 @@ require __DIR__ . "/getOffers.php";
 $client = new Client([
     "base_uri" => "https://www.yrgopelag.se/centralbank/"
 ]);
+
 $giphyClient = new Client([
     "base_uri" => 'https://api.giphy.com/v1/gifs/search',
 ]);
@@ -21,7 +22,7 @@ $giphyClient = new Client([
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
-if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_POST["room"], $_POST["total-cost"])) {
+if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_POST["room"])) {
     $transferCode = $_POST["transfer-code"];
     $roomId = $_POST["room"];
     $checkIn = $_POST["check_in"];
@@ -75,7 +76,7 @@ if (isset($_POST["check_in"], $_POST["check_out"], $_POST["transfer-code"], $_PO
         $response = json_decode($request->getBody()->getContents(), true);
 
         if (isset($response["error"])) {
-            $_SESSION["bookingErrors"][] = "The code you provided holds no value, check with your bank before booking a room again";
+            $_SESSION["bookingErrors"][] = "The transfer code amount dose not match the price for your booking, please check with your bank before booking a room again";
             redirect("./../room.php?room=$roomId");
         }
     } catch (ClientException $e) {

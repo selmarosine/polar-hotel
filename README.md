@@ -2,7 +2,7 @@
 
 This is a small hotel website project that displays some rooms from a fictional hotel, where the user can book the rooms on available dates, add extra activities and get some discount if the requirements are fulfilled.
 
-The hotel is written in HTML, CSS, PHP and some Javascript, and for storing rooms, activities, discounts and booked dates i have used sqlite.
+The hotel is written in HTML, CSS, PHP and some Javascript, and for storing rooms, activities, discounts and booked dates I have used SQLite.
 
 # Svalbard
 
@@ -12,13 +12,13 @@ Svalbard is a group of islands in the Arctic Ocean, near Norway. It's known for 
 
 # Polar hotel
 
-The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nestled in Longyearbyen, it provides a unique experience with stunning views, making it an ideal retreat for those seeking an adventurous getaway in the Arctic.
+The Polar Hotel in Svalbard offers a cozy stay amidst Arctic beauty. Nested in Longyearbyen, it provides a unique experience with stunning views, making it an ideal retreat for those seeking an adventurous getaway in the Arctic.
 
 # Instructions
 
 ### Localhost
 
-There is a `router.php` file that handles displaying a 404 page if url path dose not exists you need to start the php localhost like this.
+There is a `router.php` file that handles displaying a 404 page if url path dose not exists, you need to start the php localhost like this.
 
 ```bash
 php -S localhost:8000 router.php

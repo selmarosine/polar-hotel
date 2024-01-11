@@ -1,7 +1,14 @@
-<?php require_once __DIR__ . "/../app/autoload.php"; ?>
+<?php
+require_once __DIR__ . "/../app/autoload.php";
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
+?>
 
 <header>
-    <a href="index.php" class="nav-logo">Polar Hotel</a>
+    <a href="index.php" class="nav-logo"><?= $_ENV["HOTEL_NAME"] ?></a>
     <aside id="a-side">
         <nav id="a-side-nav">
             <a class="mobile-nav-a" href="activities.php">Activities</a>
