@@ -47,14 +47,26 @@ The database stores rooms, activities, discount and booked dates in the `polar-h
 The created tables commands are included in the `db-structure.md`
 
 # Code review
+Your project was done very well! It made it a bit difficult for me to come up with ten improvements. I finally did and here's some points that could improve your code
 
-1. Review
-2. Review
-3. Review
-4. Review
-5. Review
-6. Review
-7. Review
-8. Review
-9. Review
-10. Review
+1. index.php - starting around line 47, you have both php and html. By looking at it, you understand what the code does. However, I would add one/a few simple comments here just to make it easier on the eye to find the code you're looking for, by search for example.
+
+2. receipt.php - just like my last point, this file could also use some comments. At least a simple one in the beginning so you quickly understand what the code does.
+
+3. bookRoom.php - On line 53 you have a redirect link. This code snippet/link appears 7 times in that file. Maybe you could create a variable with that link instead of writing the same text over and over? 
+
+4. updateActivity.php - Same goes here with redirect. Consider writing redirect($variable) instead, especially when you have to use that link more than once.
+
+5. style.css - This file is very structured and well written. However it is quite long. Maybe you could've split it a bit? For example, everything regarding the admin page could have its own css file? It isn't necessary since everything works fine now! It's just a matter of taste/preference :)
+
+6. mediaQuery.css - line 11, this will override the styling you have written on line 7 since you have the class room-gallery-grid twice with pretty much the same values. It's not an issue but you could "clean" it to make the stylesheet shorter.
+
+7. script.js - The overall code for your hamburger-menu looks good! However, maybe you should consider another name for this document? You have two other js-documents that are named appropriately, maybe this one should be hamburger.js or something? Just to make it easier to find the script/document. 
+
+8. admin.js - Great structure! But it would've been nice with some comments explaining what this does. I tried accessing your admin page but couldn't, so I have no idea what it looks like visually. A few comments in this script would have been helpful.
+
+9. admin.php - line 5-61, maybe this could have its separate document? Again, your code works great - it's just preference :)
+
+10. General: I noticed that you don't ask for a name once you make a reservation on your site. Although it wasn't necessary here, it could be fun information to store in a database. 
+
+Again, well done on this project!
